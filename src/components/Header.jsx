@@ -6,7 +6,7 @@ function Header() {
     <div className="bg-white h-32 ">
       <div className="flex justify-between w-10/12 mx-auto sm:w-full pt-10 h-28">
         <img
-          src="../../assets/img/logo-coca.png"
+          src={require("../../assets/img/logo-coca.png")}
           alt="logo-coca-cola"
           className=" h-12 w-auto object-contain "
         />
@@ -14,7 +14,7 @@ function Header() {
           Verano 2022
         </h1>
         <img
-          src="../../assets/img/redragon-logo.png"
+          src={require("../../assets/img/redragon-logo.png")}
           alt="logo-redragon"
           className="w-auto object-contain h-14 "
         />
