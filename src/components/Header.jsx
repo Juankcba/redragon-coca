@@ -4,9 +4,9 @@ import Formulario from "./Formulario";
 function Header() {
   return (
     <div className="bg-white h-32 ">
-      <div className="flex justify-between w-10/12 mx-auto pt-10">
+      <div className="flex justify-between w-10/12 mx-auto pt-10 h-28">
         <img
-          src="/assets/img/logo-coca.png"
+          src="../../assets/img/logo-coca.png"
           alt="logo-coca-cola"
           className=" h-12 w-auto object-contain "
         />
@@ -14,11 +14,12 @@ function Header() {
           Verano 2022
         </h1>
         <img
-          src="/assets/img/redragon-logo.png"
+          src="../../assets/img/redragon-logo.png"
           alt="logo-coca-cola"
           className="w-auto object-contain h-14"
         />
       </div>
+      <div className="divisor-header w-full"></div>
     </div>
   );
 }
