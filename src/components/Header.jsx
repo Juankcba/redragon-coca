@@ -1,12 +1,12 @@
 import React from "react";
-import Formulario from "./Formulario";
-
+import logo from "../../assets/img/logo-coca.png";
+import logored from "../../assets/img/redragon-logo.png";
 function Header() {
   return (
     <div className="bg-white h-32 ">
       <div className="flex justify-between w-10/12 mx-auto sm:w-full pt-10 h-28">
         <img
-          src={require("../../assets/img/logo-coca.png")}
+          src={logo}
           alt="logo-coca-cola"
           className=" h-12 w-auto object-contain "
         />
@@ -14,7 +14,7 @@ function Header() {
           Verano 2022
         </h1>
         <img
-          src={require("../../assets/img/redragon-logo.png")}
+          src={logored}
           alt="logo-redragon"
           className="w-auto object-contain h-14 "
         />
