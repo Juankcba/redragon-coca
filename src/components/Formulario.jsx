@@ -78,10 +78,10 @@ function Formulario({ setJugadores, jugadores }) {
             <option value="" disabled>
               Selecciona una opcion
             </option>
-            <option value="counter">Lol</option>
-            <option value="counter">Counter</option>
-            <option value="counter">otros</option>
-            <option value="counter">otros</option>
+            <option value="Lol">Lol</option>
+            <option value="Counter">Counter</option>
+            <option value="Fornite">Fornite</option>
+            <option value="Minecraft">Minecraft</option>
           </select>
         </div>
         <input
