@@ -10,9 +10,7 @@ function Header() {
           alt="logo-coca-cola"
           className=" h-12 w-auto object-contain "
         />
-        <h1 className="font-black text-md md:text-5xl text-center md:w-2/3 mx-auto">
-          Verano 2022
-        </h1>
+
         <img
           src={logored}
           alt="logo-redragon"
