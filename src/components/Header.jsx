@@ -4,7 +4,7 @@ import logored from "../../assets/img/redragon-logo.png";
 function Header() {
   return (
     <div className="bg-white h-32 ">
-      <div className="flex justify-between w-10/12 mx-auto sm:w-full pt-10 h-28">
+      <div className="flex justify-between w-10/12 mx-auto pt-10 h-28">
         <img
           src={logo}
           alt="logo-coca-cola"
