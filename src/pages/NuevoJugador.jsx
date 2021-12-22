@@ -11,22 +11,18 @@ function NuevoJugador({
   eliminarJugador,
 }) {
   return (
-    <div className="container-fluid mx-auto">
-      <Header />
-      <div className="container mx-auto mt-12  md:flex ">
-        <Formulario
-          jugadores={jugadores}
-          jugador={jugador}
-          setJugadores={setJugadores}
-          setJugador={setJugador}
-        />
-        <ListadoJugadores
-          jugadores={jugadores}
-          setJugador={setJugador}
-          eliminarJugador={eliminarJugador}
-        />
-      </div>
-      <Footer />
+    <div className="container mx-auto mt-12  md:flex ">
+      <Formulario
+        jugadores={jugadores}
+        jugador={jugador}
+        setJugadores={setJugadores}
+        setJugador={setJugador}
+      />
+      <ListadoJugadores
+        jugadores={jugadores}
+        setJugador={setJugador}
+        eliminarJugador={eliminarJugador}
+      />
     </div>
   );
 }

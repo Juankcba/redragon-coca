@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import IniciarSesion from "./layout/IniciarSesion";
 import NuevoJugador from "./pages/NuevoJugador";
+import Layout from "./layout/Layout";
 function App() {
   const [jugadores, setJugadores] = useState([]);
   const [jugador, setJugador] = useState({});
@@ -29,18 +30,20 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<IniciarSesion />}></Route>
-        <Route
-          path="/nuevojugador"
-          element={
-            <NuevoJugador
-              jugadores={jugadores}
-              jugador={jugador}
-              setJugadores={setJugadores}
-              setJugador={setJugador}
-              eliminarJugador={eliminarJugador}
-            />
-          }
-        ></Route>
+        <Route path="/nuevojugador" element={<Layout />}>
+          <Route
+            index
+            element={
+              <NuevoJugador
+                jugadores={jugadores}
+                jugador={jugador}
+                setJugadores={setJugadores}
+                setJugador={setJugador}
+                eliminarJugador={eliminarJugador}
+              />
+            }
+          />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
