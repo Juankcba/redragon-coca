@@ -19,6 +19,13 @@ body{
   position:relative;
   bottom: -8px;
 }
+.slow-moves {
+  transition: 0.3s;
+}
+
+.sidebar-inactive {
+  transform: translateX(-100%);
+}
 .contenido-principal{
   height: calc(100vh - 345px);
 }

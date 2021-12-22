@@ -1,9 +1,15 @@
 import React from "react";
 import Jugador from "./Jugador";
 
-const ListadoJugadores = ({ jugadores, setJugador, eliminarJugador }) => {
+const ListadoJugadores = ({ edit, jugadores, setJugador, eliminarJugador }) => {
   return (
-    <div className="md:w-1/2 lg:w-3/5 md:h-screen ">
+    <div
+      className={
+        edit
+          ? "md:w-1/2 lg:w-3/5 md:h-screen"
+          : " h-screen mt-20 w-full mx-auto"
+      }
+    >
       {jugadores && jugadores.length > 0 ? (
         <h2 className="text-center text-white font-bold uppercase">
           Jugadores Participantes
@@ -16,6 +22,7 @@ const ListadoJugadores = ({ jugadores, setJugador, eliminarJugador }) => {
             jugador={jugador}
             eliminarJugador={eliminarJugador}
             setJugador={setJugador}
+            edit={edit}
           />
         ))}
       </div>

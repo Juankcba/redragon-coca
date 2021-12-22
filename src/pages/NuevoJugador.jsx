@@ -22,6 +22,7 @@ function NuevoJugador({
         jugadores={jugadores}
         setJugador={setJugador}
         eliminarJugador={eliminarJugador}
+        edit={true}
       />
     </div>
   );

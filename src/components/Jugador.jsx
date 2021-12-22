@@ -1,7 +1,7 @@
 import React from "react";
 import swal from "sweetalert";
 
-function Jugador({ jugador, setJugador, eliminarJugador }) {
+function Jugador({ edit, jugador, setJugador, eliminarJugador }) {
   const handleEliminar = () => {
     swal({
       title: "Vas a eliminar a un jugador",
@@ -27,22 +27,24 @@ function Jugador({ jugador, setJugador, eliminarJugador }) {
         Juego: {""}
         <span className="font-normal">{jugador.game}</span>
       </p>
-      <div className="flex justify-between mt-10">
-        <button
-          type="button"
-          className="bg-black py-2 px-10  text-white font-bold uppercase rounded-lg hover:bg-gray-800"
-          onClick={() => setJugador(jugador)}
-        >
-          Editar
-        </button>
-        <button
-          type="button"
-          className="py-2 px-10 bg-red-600 hover:bg-red-700 uppercase font-bold text-center text-white rounded-lg"
-          onClick={handleEliminar}
-        >
-          Eliminar
-        </button>
-      </div>
+      {edit && (
+        <div className="flex justify-between mt-10">
+          <button
+            type="button"
+            className="bg-black py-2 px-10  text-white font-bold uppercase rounded-lg hover:bg-gray-800"
+            onClick={() => setJugador(jugador)}
+          >
+            Editar
+          </button>
+          <button
+            type="button"
+            className="py-2 px-10 bg-red-600 hover:bg-red-700 uppercase font-bold text-center text-white rounded-lg"
+            onClick={handleEliminar}
+          >
+            Eliminar
+          </button>
+        </div>
+      )}
     </div>
   );
 }

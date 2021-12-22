@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import IniciarSesion from "./layout/IniciarSesion";
 import NuevoJugador from "./pages/NuevoJugador";
 import Layout from "./layout/Layout";
+import ListadoJugadores from "./components/ListadoJugadores";
 function App() {
   const [jugadores, setJugadores] = useState([]);
   const [jugador, setJugador] = useState({});
@@ -30,9 +31,20 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<IniciarSesion />}></Route>
-        <Route path="/nuevojugador" element={<Layout />}>
+        <Route path="/jugadores" element={<Layout />}>
           <Route
             index
+            element={
+              <ListadoJugadores
+                jugadores={jugadores}
+                setJugador={setJugador}
+                eliminarJugador={eliminarJugador}
+                edit={false}
+              />
+            }
+          />
+          <Route
+            path="nuevo"
             element={
               <NuevoJugador
                 jugadores={jugadores}
