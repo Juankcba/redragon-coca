@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
 
-import Header from "./components/Header";
-import Formulario from "./components/Formulario";
-import ListadoJugadores from "./components/ListadoJugadores";
-import Footer from "./components/Footer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import IniciarSesion from "./layout/IniciarSesion";
+import NuevoJugador from "./pages/NuevoJugador";
 function App() {
   const [jugadores, setJugadores] = useState([]);
   const [jugador, setJugador] = useState({});
@@ -28,23 +26,23 @@ function App() {
     localStorage.setItem("jugadores", JSON.stringify(jugadores));
   }, [jugadores]);
   return (
-    <div className="container-fluid mx-auto">
-      <Header />
-      <div className="container mx-auto mt-12  md:flex ">
-        <Formulario
-          jugadores={jugadores}
-          jugador={jugador}
-          setJugadores={setJugadores}
-          setJugador={setJugador}
-        />
-        <ListadoJugadores
-          jugadores={jugadores}
-          setJugador={setJugador}
-          eliminarJugador={eliminarJugador}
-        />
-      </div>
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<IniciarSesion />}></Route>
+        <Route
+          path="/nuevojugador"
+          element={
+            <NuevoJugador
+              jugadores={jugadores}
+              jugador={jugador}
+              setJugadores={setJugadores}
+              setJugador={setJugador}
+              eliminarJugador={eliminarJugador}
+            />
+          }
+        ></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
