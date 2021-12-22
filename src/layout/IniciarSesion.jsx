@@ -10,7 +10,7 @@ function IniciarSesion() {
       {visible && (
         <div className=" z-10 absolute top-0 left-0 w-full h-screen   ">
           <div className="bg-slate-500 opacity-50 w-full h-screen  relative z-0 top-0 left-0"></div>
-          <div className="bg-white w-3/12 h-screen p-5 opacity-100 absolute top-0 left-0 z-10 mx-auto">
+          <div className="bg-white w-2/3 md:w-3/12 h-screen p-5 opacity-100 absolute top-0 left-0 z-10 mx-auto">
             <div className="flex justify-between">
               <h2 className="text-center font-bold text-lg ">Menu </h2>
               <button onClick={() => setVisible(!visible)}>Cerrar</button>
@@ -23,8 +23,8 @@ function IniciarSesion() {
         </div>
       )}
 
-      <div className="container mx-auto mt-12  md:flex contenido-principal flex justify-center">
-        <form className="bg-white shadow-md rounded-lg mb-10 py-10 px-10 w-5/12 h-full mx-10">
+      <div className="container mx-auto mt-12  md:flex contenido-principal  flex justify-center">
+        <form className="bg-white shadow-md rounded-lg mb-10 py-10 px-10 w-full md:w-5/12 h-full mx-10">
           <div className="mb-5">
             <label htmlFor="user" className="block text-gray-700 uppercase">
               Usuario

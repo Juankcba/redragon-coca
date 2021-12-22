@@ -27,7 +27,8 @@ body{
   transform: translateX(-100%);
 }
 .contenido-principal{
-  height: calc(100vh - 345px);
+  height: calc(100vh - 255px);
+  
 }
 .divisor-header{
   width: 100%;
