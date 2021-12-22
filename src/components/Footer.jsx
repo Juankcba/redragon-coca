@@ -5,8 +5,7 @@ const Footer = () => {
       <img
         src={latas}
         alt="latas"
-        className="p-0 m-0  w-full h-20 mb--10 bg-repeat-x"
-        style={{ marginBottom: "-10px" }}
+        className="p-0 m-0  w-full h-20 mb--10 bg-repeat-x position-relative-bottom"
       />
       <div className="bg-black ">
         <h3 className=" py-8">Todos los derechos reservados</h3>
