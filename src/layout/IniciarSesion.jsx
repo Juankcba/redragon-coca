@@ -24,7 +24,7 @@ function IniciarSesion() {
       )}
 
       <div className="container mx-auto mt-12  md:flex contenido-principal  flex justify-center">
-        <form className="bg-white shadow-md rounded-lg mb-10 py-10 px-10 w-full md:w-5/12 h-full mx-10">
+        <form className="bg-white shadow-md rounded-lg mb-10 py-2 px-3 mx-2  lg:py-10 lg:px-10 w-full md:w-5/12  lg:mx-10">
           <div className="mb-5">
             <label htmlFor="user" className="block text-gray-700 uppercase">
               Usuario
