@@ -4,7 +4,7 @@ import logo from "./logo.svg";
 import Header from "./components/Header";
 import Formulario from "./components/Formulario";
 import ListadoJugadores from "./components/ListadoJugadores";
-
+import Footer from "./components/Footer";
 function App() {
   const [jugadores, setJugadores] = useState([]);
 
@@ -15,6 +15,7 @@ function App() {
         <Formulario jugadores={jugadores} setJugadores={setJugadores} />
         <ListadoJugadores jugadores={jugadores} />
       </div>
+      <Footer />
     </div>
   );
 }
