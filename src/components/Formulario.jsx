@@ -1,15 +1,29 @@
 import React, { useState, useEffect } from "react";
 
-function Formulario({ setJugadores, jugadores }) {
+function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [game, setGame] = useState("");
 
   const [error, setError] = useState(false);
 
+  useEffect(() => {
+    if (Object.keys(jugador).length > 0) {
+      setName(jugador.name);
+      setEmail(jugador.email);
+      setGame(jugador.game);
+    }
+  }, [jugador]);
+
+  const generarID = () => {
+    const random = Math.random().toString(36).substr(2);
+    const fecha = Date.now().toString(36);
+    return random + fecha;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name, email, game);
+
     //validacion
     if ([name, email, game].includes("")) {
       console.log("hay al menos un campo vacio");
@@ -17,7 +31,21 @@ function Formulario({ setJugadores, jugadores }) {
       return;
     }
     setError(false);
-    setJugadores([...jugadores, { name: name, email: email, game: game }]);
+    if (jugador.id) {
+      const jugadoresAcutalizados = jugadores.map((jugadorState) =>
+        jugadorState.id === jugador.id
+          ? { name: name, email: email, game: game, id: jugador.id }
+          : jugadorState
+      );
+      setJugadores(jugadoresAcutalizados);
+      setJugador({});
+    } else {
+      setJugadores([
+        ...jugadores,
+        { name: name, email: email, game: game, id: generarID() },
+      ]);
+    }
+
     setName("");
     setGame("");
     setEmail("");
@@ -84,10 +112,11 @@ function Formulario({ setJugadores, jugadores }) {
             <option value="Minecraft">Minecraft</option>
           </select>
         </div>
+
         <input
           type="submit"
-          value="Registrate"
-          className="text-white uppercase font-bold bg-red-600 w-full p-3 hover:bg-red-900 cursor-pointer transition-color"
+          value={jugador.id ? "Guardar Registro " : "Registrate"}
+          className="text-white uppercase font-bold bg-red-600 w-full p-3 hover:bg-red-900 cursor-pointer rounded-lg transition-color"
         />
       </form>
     </div>
