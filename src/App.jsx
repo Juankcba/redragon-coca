@@ -6,6 +6,8 @@ import NuevoJugador from "./pages/NuevoJugador";
 import Layout from "./layout/Layout";
 import firebase from "../firebase";
 import ListadoJugadores from "./components/ListadoJugadores";
+import Registro from "./pages/Registro";
+import NuevoParticipante from "./pages/NuevoParticipante";
 function App() {
   const [jugadores, setJugadores] = useState([]);
   const [jugador, setJugador] = useState({});
@@ -116,6 +118,24 @@ function App() {
               />
             }
           />
+        </Route>
+        <Route
+          path="/registro"
+          element={<Layout usuarioAutenticado={usuarioAutenticado} />}
+        >
+          <Route
+            index
+            element={
+              <Registro
+                jugadores={jugadores}
+                setJugador={setJugador}
+                eliminarJugador={eliminarJugador}
+                edit={false}
+              />
+            }
+          />
+          <Route path="nuevo" element={<NuevoParticipante />} />
+          <Route />
         </Route>
       </Routes>
     </BrowserRouter>

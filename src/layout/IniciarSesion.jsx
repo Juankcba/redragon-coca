@@ -116,7 +116,7 @@ function IniciarSesion({ usuarioAutenticado, guardarUsuarioAutenticado }) {
             </h1>
             <div className="flex justify-center mt-10 mx-auto">
               <div className="bg-white shadow-md rounded-lg mb-10 py-2 px-3 mx-2">
-                <h2>Sorteos</h2>
+                <Link to="/registro/nuevo">Sorteos</Link>
               </div>
               <div className="bg-white shadow-md rounded-lg mb-10 py-2 px-3 mx-2">
                 <Link to="/jugadores">Jugadores</Link>
