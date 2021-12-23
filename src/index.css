@@ -27,7 +27,7 @@ body{
   transform: translateX(-100%);
 }
 .contenido-principal{
-  height: calc(100vh - 350px);
+  height: calc(100vh - 280px);
   
 }
 .divisor-header{
