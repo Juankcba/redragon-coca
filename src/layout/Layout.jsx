@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Layout = ({ usuarioAutenticado }) => {
   const [visible, setVisible] = useState(false);
   return (
-    <div className="container-fluid mx-auto">
+    <div className="container-fluid mx-auto h-screen">
       {visible && (
         <div className=" z-10 absolute top-0 left-0 w-full h-screen   ">
           <div className="bg-slate-500 opacity-50 w-full h-screen  relative z-0 top-0 left-0"></div>
@@ -15,7 +15,7 @@ const Layout = ({ usuarioAutenticado }) => {
               <h2 className="text-center font-bold text-lg ">Menu </h2>
               <button onClick={() => setVisible(!visible)}>Cerrar</button>
             </div>
-            <nav className="flex flex-col">
+            <nav className="flex flex-col" onClick={() => setVisible(false)}>
               <Link to="/registro">Sorteo</Link>
               <Link to="/jugadores">Jugadores</Link>
               {usuarioAutenticado && (

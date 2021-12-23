@@ -24,7 +24,7 @@ const ListadoJugadores = ({
             Jugadores Participantes
           </h2>
         ) : null}
-        <div className=" h-48 mb-36 md:h-auto md:overflow-y-scroll no-scrollbar w-10/12 mx-auto">
+        <div className=" h-64 md:h-auto overflow-y-scroll no-scrollbar w-10/12 mx-auto">
           {jugadores.map((jugador) => (
             <Jugador
               key={jugador.id}

@@ -2,7 +2,7 @@ import React from "react";
 
 function Registro(props) {
   return (
-    <div>
+    <div className="container-fluid contenido-principal pt-10 mb-14">
       <h1>Desde Registro</h1>
     </div>
   );

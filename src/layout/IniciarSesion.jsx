@@ -56,7 +56,7 @@ function IniciarSesion({ usuarioAutenticado, guardarUsuarioAutenticado }) {
 
       <div>
         {!usuarioAutenticado ? (
-          <div className=" container mx-auto mt-12  md:flex lg:contenido-principal  flex justify-center">
+          <div className=" container mx-auto mt-12  md:flex contenido-principal  flex justify-center">
             <form
               onSubmit={handleSubmit}
               className="bg-white shadow-md rounded-lg mb-10 py-2 px-3 mx-2  lg:py-10 lg:px-10 w-full md:w-5/12  lg:mx-10"
@@ -110,7 +110,7 @@ function IniciarSesion({ usuarioAutenticado, guardarUsuarioAutenticado }) {
             </form>
           </div>
         ) : (
-          <div className="mt-20">
+          <div className="container contenido-principal  mt-20">
             <h1 className="text-center text-white font-bold">
               Bienvenido {usuarioAutenticado.email}
             </h1>
