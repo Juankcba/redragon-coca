@@ -9,7 +9,18 @@ import ListadoJugadores from "./components/ListadoJugadores";
 function App() {
   const [jugadores, setJugadores] = useState([]);
   const [jugador, setJugador] = useState({});
-
+  const [usuarioAutenticado, guardarUsuarioAutenticado] = useState(null);
+  useEffect(() => {
+    const checkUser = async () => {
+      await firebase.auth.onAuthStateChanged((user) => {
+        if (user) {
+          guardarUsuarioAutenticado(user);
+          console.log(user);
+        }
+      });
+    };
+    checkUser();
+  }, []);
   const eliminarJugador = async (id) => {
     try {
       // const url = import.meta.env.VITE_API_URL + `/jugadores/${id}`;
@@ -68,8 +79,19 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<IniciarSesion />}></Route>
-        <Route path="/jugadores" element={<Layout />}>
+        <Route
+          path="/"
+          element={
+            <IniciarSesion
+              usuarioAutenticado={usuarioAutenticado}
+              guardarUsuarioAutenticado={guardarUsuarioAutenticado}
+            />
+          }
+        ></Route>
+        <Route
+          path="/jugadores"
+          element={<Layout usuarioAutenticado={usuarioAutenticado} />}
+        >
           <Route
             index
             element={
@@ -85,6 +107,7 @@ function App() {
             path="nuevo"
             element={
               <NuevoJugador
+                usuarioAutenticado={usuarioAutenticado}
                 jugadores={jugadores}
                 jugador={jugador}
                 setJugadores={setJugadores}

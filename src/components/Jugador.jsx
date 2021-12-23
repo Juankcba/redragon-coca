@@ -1,7 +1,13 @@
 import React from "react";
 import swal from "sweetalert";
 
-function Jugador({ edit, jugador, setJugador, eliminarJugador }) {
+function Jugador({
+  usuarioAutenticado,
+  edit,
+  jugador,
+  setJugador,
+  eliminarJugador,
+}) {
   const handleEliminar = () => {
     swal({
       title: "Vas a eliminar a un jugador",
@@ -27,7 +33,7 @@ function Jugador({ edit, jugador, setJugador, eliminarJugador }) {
         Juego: {""}
         <span className="font-normal">{jugador.game}</span>
       </p>
-      {edit && (
+      {edit && usuarioAutenticado && (
         <div className="flex justify-between mt-10">
           <button
             type="button"

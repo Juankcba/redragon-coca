@@ -9,6 +9,7 @@ function NuevoJugador({
   setJugador,
   setJugadores,
   eliminarJugador,
+  usuarioAutenticado,
 }) {
   return (
     <div className="container mx-auto mt-12  md:flex ">
@@ -23,6 +24,7 @@ function NuevoJugador({
         setJugador={setJugador}
         eliminarJugador={eliminarJugador}
         edit={true}
+        usuarioAutenticado={usuarioAutenticado}
       />
     </div>
   );

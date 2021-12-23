@@ -3,10 +3,11 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import firebase from "../../firebase";
 import { Link } from "react-router-dom";
-function IniciarSesion() {
+import swal from "sweetalert";
+function IniciarSesion({ usuarioAutenticado, guardarUsuarioAutenticado }) {
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [usuarioAutenticado, guardarUsuarioAutenticado] = useState(null);
+
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -17,8 +18,12 @@ function IniciarSesion() {
       await firebase.login(user, password);
       await firebase.auth.onAuthStateChanged((user) => {
         if (user) {
+          console.log("autenticado", user);
           guardarUsuarioAutenticado(user);
+          setUser("");
+          setPassword("");
           setError(null);
+          swal({ title: "Ingreso Correcto", icon: "success" });
         }
       });
       return "ok";
@@ -41,59 +46,84 @@ function IniciarSesion() {
             </div>
             <nav className="flex flex-col">
               <Link to="/jugadores">Jugadores</Link>
-              <Link to="/jugadores/nuevo">Agregar Jugadores</Link>
+              {usuarioAutenticado && (
+                <Link to="/jugadores/nuevo">Agregar Jugadores</Link>
+              )}
             </nav>
           </div>
         </div>
       )}
 
-      <div className="container mx-auto mt-12  md:flex lg:contenido-principal  flex justify-center">
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white shadow-md rounded-lg mb-10 py-2 px-3 mx-2  lg:py-10 lg:px-10 w-full md:w-5/12  lg:mx-10"
-        >
-          <div className="mb-5">
-            <label htmlFor="user" className="block text-gray-700 uppercase">
-              Usuario
-            </label>
-            <input
-              id="user"
-              type="text"
-              placeholder="Usuario"
-              className="border-2 w-full p-2 mt-2 rounded-md"
-              onChange={(e) => setUser(e.target.value)}
-            />
+      <div>
+        {!usuarioAutenticado ? (
+          <div className=" container mx-auto mt-12  md:flex lg:contenido-principal  flex justify-center">
+            <form
+              onSubmit={handleSubmit}
+              className="bg-white shadow-md rounded-lg mb-10 py-2 px-3 mx-2  lg:py-10 lg:px-10 w-full md:w-5/12  lg:mx-10"
+            >
+              <div className="mb-5">
+                <label htmlFor="user" className="block text-gray-700 uppercase">
+                  Usuario
+                </label>
+                <input
+                  id="user"
+                  type="text"
+                  value={user}
+                  placeholder="Usuario"
+                  className="border-2 w-full p-2 mt-2 rounded-md"
+                  onChange={(e) => setUser(e.target.value)}
+                />
+              </div>
+              <div className="mb-5">
+                <label
+                  htmlFor="password"
+                  className="block text-gray-700 uppercase"
+                >
+                  Contraseña
+                </label>
+                <input
+                  id="password"
+                  type="password"
+                  value={password}
+                  placeholder="Contraseña"
+                  className="border-2 w-full p-2 mt-2 rounded-md"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <input
+                type="submit"
+                value="Ingresar"
+                className="text-white uppercase font-bold bg-red-600 w-full p-3 hover:bg-red-900 cursor-pointer rounded-lg transition-color"
+              />
+              <button
+                type="button"
+                className="text-white font-bold uppercase bg-gray-700 hover:bg-gray-800 rounded-lg p-3 w-full  mt-5"
+                onClick={() => setVisible(!visible)}
+              >
+                Menu
+              </button>
+              {error && (
+                <p className="mt-2 bg-red-500 p-2 text-center uppercase text-white">
+                  Hubo un error
+                </p>
+              )}
+            </form>
           </div>
-          <div className="mb-5">
-            <label htmlFor="password" className="block text-gray-700 uppercase">
-              Contraseña
-            </label>
-            <input
-              id="password"
-              type="password"
-              placeholder="Contraseña"
-              className="border-2 w-full p-2 mt-2 rounded-md"
-              onChange={(e) => setPassword(e.target.value)}
-            />
+        ) : (
+          <div className="mt-20">
+            <h1 className="text-center text-white font-bold">
+              Bienvenido {usuarioAutenticado.email}
+            </h1>
+            <div className="flex justify-center mt-10 mx-auto">
+              <div className="bg-white shadow-md rounded-lg mb-10 py-2 px-3 mx-2">
+                <h2>Sorteos</h2>
+              </div>
+              <div className="bg-white shadow-md rounded-lg mb-10 py-2 px-3 mx-2">
+                <Link to="/jugadores">Jugadores</Link>
+              </div>
+            </div>
           </div>
-          <input
-            type="submit"
-            value="Ingresar"
-            className="text-white uppercase font-bold bg-red-600 w-full p-3 hover:bg-red-900 cursor-pointer rounded-lg transition-color"
-          />
-          <button
-            type="button"
-            className="text-white font-bold uppercase bg-gray-700 hover:bg-gray-800 rounded-lg p-3 w-full  mt-5"
-            onClick={() => setVisible(!visible)}
-          >
-            Menu
-          </button>
-          {error && (
-            <p className="mt-2 bg-red-500 p-2 text-center uppercase text-white">
-              Hubo un error
-            </p>
-          )}
-        </form>
+        )}
       </div>
       <Footer />
     </div>

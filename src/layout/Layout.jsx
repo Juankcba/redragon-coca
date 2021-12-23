@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
-const Layout = () => {
+const Layout = ({ usuarioAutenticado }) => {
   const [visible, setVisible] = useState(false);
   return (
     <div className="container-fluid mx-auto">
@@ -17,7 +17,9 @@ const Layout = () => {
             </div>
             <nav className="flex flex-col">
               <Link to="/jugadores">Jugadores</Link>
-              <Link to="/jugadores/nuevo">Agregar Jugadores</Link>
+              {usuarioAutenticado && (
+                <Link to="/jugadores/nuevo">Agregar Jugadores</Link>
+              )}
             </nav>
           </div>
         </div>
