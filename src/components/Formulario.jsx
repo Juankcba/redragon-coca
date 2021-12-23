@@ -21,7 +21,7 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
     return random + fecha;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     //validacion
@@ -32,18 +32,53 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
     }
     setError(false);
     if (jugador.id) {
-      const jugadoresAcutalizados = jugadores.map((jugadorState) =>
-        jugadorState.id === jugador.id
-          ? { name: name, email: email, game: game, id: jugador.id }
-          : jugadorState
-      );
-      setJugadores(jugadoresAcutalizados);
-      setJugador({});
+      try {
+        const url = import.meta.env.VITE_API_URL + `/jugadores/${jugador.id}`;
+        const respuesta = await fetch(url, {
+          method: "PUT",
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            game: game,
+            create: new Date(),
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const resultado = await respuesta.json();
+        const jugadoresAcutalizados = jugadores.map((jugadorState) =>
+          jugadorState.id === resultado.id
+            ? { name: name, email: email, game: game, id: resultado.id }
+            : jugadorState
+        );
+        setJugadores(jugadoresAcutalizados);
+        setJugador({});
+        console.log(resultado);
+      } catch (error) {
+        console.log(error);
+      }
     } else {
-      setJugadores([
-        ...jugadores,
-        { name: name, email: email, game: game, id: generarID() },
-      ]);
+      try {
+        const url = import.meta.env.VITE_API_URL + "/jugadores";
+        const respuesta = await fetch(url, {
+          method: "POST",
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            game: game,
+            create: new Date(),
+            id: generarID(),
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const resultado = await respuesta.json();
+        setJugadores([...jugadores, resultado]);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     setName("");

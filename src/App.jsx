@@ -9,24 +9,33 @@ function App() {
   const [jugadores, setJugadores] = useState([]);
   const [jugador, setJugador] = useState({});
 
-  const eliminarJugador = (id) => {
-    const jugadoresActualizados = jugadores.filter(
-      (juagadorState) => juagadorState.id !== id
-    );
-
-    setJugadores(jugadoresActualizados);
+  const eliminarJugador = async (id) => {
+    try {
+      const url = import.meta.env.VITE_API_URL + `/jugadores/${id}`;
+      const respuesta = await fetch(url, {
+        method: "DELETE",
+      });
+      await respuesta.json();
+      console.log("res delete", respuesta);
+      const jugadoresActualizados = jugadores.filter(
+        (juagadorState) => juagadorState.id !== id
+      );
+      setJugadores(jugadoresActualizados);
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
-    const obtenerLocal = () => {
-      const jugadoresLocal =
-        JSON.parse(localStorage.getItem("jugadores")) ?? [];
+    const obtenerLocal = async () => {
+      const url = import.meta.env.VITE_API_URL + "/jugadores";
+      const respuesta = await fetch(url);
+      const jugadoresLocal = (await respuesta.json()) ?? [];
+
       setJugadores(jugadoresLocal);
     };
     obtenerLocal();
   }, []);
-  useEffect(() => {
-    localStorage.setItem("jugadores", JSON.stringify(jugadores));
-  }, [jugadores]);
+
   return (
     <BrowserRouter>
       <Routes>

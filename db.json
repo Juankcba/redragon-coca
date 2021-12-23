@@ -1,0 +1,17 @@
+{
+  "jugadores": [
+    {
+      "name": "J Gonzalez Lencina",
+      "email": "juangblade@gmail.com",
+      "game": "Lol",
+      "id": "gfi8gwgy6eqkxik5uui"
+    },
+    {
+      "name": "Juan Carlos Gonzalez",
+      "email": "juangblade@hotmail.com",
+      "game": "Lol",
+      "create": "2021-12-23T06:10:25.151Z",
+      "id": "c5n1m7rb955kxikfx1b"
+    }
+  ]
+}
