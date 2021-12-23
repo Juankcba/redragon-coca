@@ -44,10 +44,14 @@ function IniciarSesion({ usuarioAutenticado, guardarUsuarioAutenticado }) {
               <h2 className="text-center font-bold text-lg ">Menu </h2>
               <button onClick={() => setVisible(!visible)}>Cerrar</button>
             </div>
-            <nav className="flex flex-col">
+            <nav className="flex flex-col" onClick={() => setVisible(false)}>
+              <Link to="/registro">Sorteo</Link>
               <Link to="/jugadores">Jugadores</Link>
               {usuarioAutenticado && (
-                <Link to="/jugadores/nuevo">Agregar Jugadores</Link>
+                <>
+                  <Link to="/jugadores/nuevo">Agregar Jugadores</Link>
+                  <Link to="/registro/nuevo">Agregar Participante</Link>
+                </>
               )}
             </nav>
           </div>
