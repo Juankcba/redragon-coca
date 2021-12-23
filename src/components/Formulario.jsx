@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import firebase from "../../firebase";
 function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -33,49 +33,82 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
     setError(false);
     if (jugador.id) {
       try {
-        const url = import.meta.env.VITE_API_URL + `/jugadores/${jugador.id}`;
-        const respuesta = await fetch(url, {
-          method: "PUT",
-          body: JSON.stringify({
+        // const url = import.meta.env.VITE_API_URL + `/jugadores/${jugador.id}`;
+        // const respuesta = await fetch(url, {
+        //   method: "PUT",
+        //   body: JSON.stringify({
+        //     name: name,
+        //     email: email,
+        //     game: game,
+        //     create: new Date(),
+        //   }),
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        // });
+        // const resultado = await respuesta.json();
+        await firebase.db
+          .collection("jugadores")
+          .doc(jugador.id)
+          .update({
             name: name,
             email: email,
             game: game,
             create: new Date(),
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const resultado = await respuesta.json();
-        const jugadoresAcutalizados = jugadores.map((jugadorState) =>
-          jugadorState.id === resultado.id
-            ? { name: name, email: email, game: game, id: resultado.id }
-            : jugadorState
-        );
-        setJugadores(jugadoresAcutalizados);
-        setJugador({});
-        console.log(resultado);
+            id: jugador.id,
+          })
+          .then(() => {
+            const jugadoresAcutalizados = jugadores.map((jugadorState) =>
+              jugadorState.id === jugador.id
+                ? { name: name, email: email, game: game, id: jugador.id }
+                : jugadorState
+            );
+            setJugadores(jugadoresAcutalizados);
+            setJugador({});
+          });
       } catch (error) {
         console.log(error);
       }
     } else {
       try {
-        const url = import.meta.env.VITE_API_URL + "/jugadores";
-        const respuesta = await fetch(url, {
-          method: "POST",
-          body: JSON.stringify({
+        // const url = import.meta.env.VITE_API_URL + "/jugadores";
+        // const respuesta = await fetch(url, {
+        //   method: "POST",
+        //   body: JSON.stringify({
+        //     name: name,
+        //     email: email,
+        //     game: game,
+        //     create: new Date(),
+        //     id: generarID(),
+        //   }),
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        // });
+        // const resultado = await respuesta.json();
+        let id = generarID();
+        await firebase.db
+          .collection("jugadores")
+          .doc(id)
+          .set({
             name: name,
             email: email,
             game: game,
             create: new Date(),
-            id: generarID(),
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const resultado = await respuesta.json();
-        setJugadores([...jugadores, resultado]);
+            id: id,
+          })
+          .then(() => {
+            setJugadores([
+              ...jugadores,
+              {
+                name: name,
+                email: email,
+                game: game,
+                create: new Date(),
+                id: id,
+              },
+            ]);
+          });
       } catch (error) {
         console.log(error);
       }

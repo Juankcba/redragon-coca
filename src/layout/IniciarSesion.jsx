@@ -1,9 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import firebase from "../../firebase";
 import { Link } from "react-router-dom";
 function IniciarSesion() {
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [usuarioAutenticado, guardarUsuarioAutenticado] = useState(null);
+  const [user, setUser] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await firebase.login(user, password);
+      await firebase.auth.onAuthStateChanged((user) => {
+        if (user) {
+          guardarUsuarioAutenticado(user);
+          setError(null);
+        }
+      });
+      return "ok";
+    } catch (error) {
+      console.log("Hubo un error al iniciar la sesion", error.message);
+      setError(error.message);
+      return error.message;
+    }
+  };
   return (
     <div className="container-fluid mx-auto">
       <Header />
@@ -24,7 +48,10 @@ function IniciarSesion() {
       )}
 
       <div className="container mx-auto mt-12  md:flex lg:contenido-principal  flex justify-center">
-        <form className="bg-white shadow-md rounded-lg mb-10 py-2 px-3 mx-2  lg:py-10 lg:px-10 w-full md:w-5/12  lg:mx-10">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white shadow-md rounded-lg mb-10 py-2 px-3 mx-2  lg:py-10 lg:px-10 w-full md:w-5/12  lg:mx-10"
+        >
           <div className="mb-5">
             <label htmlFor="user" className="block text-gray-700 uppercase">
               Usuario
@@ -34,6 +61,7 @@ function IniciarSesion() {
               type="text"
               placeholder="Usuario"
               className="border-2 w-full p-2 mt-2 rounded-md"
+              onChange={(e) => setUser(e.target.value)}
             />
           </div>
           <div className="mb-5">
@@ -45,6 +73,7 @@ function IniciarSesion() {
               type="password"
               placeholder="Contraseña"
               className="border-2 w-full p-2 mt-2 rounded-md"
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <input
@@ -59,6 +88,11 @@ function IniciarSesion() {
           >
             Menu
           </button>
+          {error && (
+            <p className="mt-2 bg-red-500 p-2 text-center uppercase text-white">
+              Hubo un error
+            </p>
+          )}
         </form>
       </div>
       <Footer />
