@@ -7,6 +7,7 @@ const ListadoJugadores = ({
   jugadores,
   setJugador,
   eliminarJugador,
+  setJugadores,
 }) => {
   return (
     <div className={edit ? "md:w-1/2 lg:w-3/5 " : " pb-10 md:flex  "}>
@@ -29,8 +30,10 @@ const ListadoJugadores = ({
             <Jugador
               key={jugador.id}
               jugador={jugador}
+              jugadores={jugadores}
               eliminarJugador={eliminarJugador}
               setJugador={setJugador}
+              setJugadores={setJugadores}
               edit={edit}
               usuarioAutenticado={usuarioAutenticado}
             />

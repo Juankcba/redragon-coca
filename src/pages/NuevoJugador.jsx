@@ -22,6 +22,7 @@ function NuevoJugador({
       <ListadoJugadores
         jugadores={jugadores}
         setJugador={setJugador}
+        setJugadores={setJugadores}
         eliminarJugador={eliminarJugador}
         edit={true}
         usuarioAutenticado={usuarioAutenticado}

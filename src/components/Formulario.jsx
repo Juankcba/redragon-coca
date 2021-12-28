@@ -55,6 +55,9 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
             email: email,
             game: game,
             create: new Date(),
+            ocultar: false,
+            jugando: false,
+            proximo: false,
             id: jugador.id,
           })
           .then(() => {
