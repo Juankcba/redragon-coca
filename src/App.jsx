@@ -9,6 +9,8 @@ import ListadoJugadores from "./components/ListadoJugadores";
 import Registro from "./pages/Registro";
 import NuevoParticipante from "./pages/NuevoParticipante";
 function App() {
+  const [participantes, setParticipantes] = useState([]);
+  const [participante, setParticipante] = useState({});
   const [jugadores, setJugadores] = useState([]);
   const [jugador, setJugador] = useState({});
   const [usuarioAutenticado, guardarUsuarioAutenticado] = useState(null);
@@ -45,6 +47,28 @@ function App() {
       console.log(error);
     }
   };
+  const eliminarParticipante = async (id) => {
+    try {
+      // const url = import.meta.env.VITE_API_URL + `/jugadores/${id}`;
+      // const respuesta = await fetch(url, {
+      //   method: "DELETE",
+      // });
+      // await respuesta.json();
+      console.log("res delete", id);
+      await firebase.db
+        .collection("participantes")
+        .doc(id)
+        .delete()
+        .then(() => {
+          const participantesActualizados = participantes.filter(
+            (juagadorState) => juagadorState.id !== id
+          );
+          setParticipantes(participantesActualizados);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     const getProductsApi = async () => {
       let array = [];
@@ -60,6 +84,39 @@ function App() {
             });
           });
           setJugadores(array);
+        })
+        .catch(function (error) {
+          console.log("Error getting documents: ", error);
+          return null;
+        });
+
+      return array;
+    };
+    // const obtenerLocal = async () => {
+    //   const url = import.meta.env.VITE_API_URL + "/jugadores";
+    //   const respuesta = await fetch(url);
+    //   const jugadoresLocal = (await respuesta.json()) ?? [];
+
+    //   setJugadores(jugadoresLocal);
+    // };
+    getProductsApi();
+  }, []);
+
+  useEffect(() => {
+    const getProductsApi = async () => {
+      let array = [];
+
+      const result = await firebase.db
+        .collection("participantes")
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            array.push({
+              ...doc.data(),
+              id: doc.id,
+            });
+          });
+          setParticipantes(array);
         })
         .catch(function (error) {
           console.log("Error getting documents: ", error);
@@ -127,14 +184,27 @@ function App() {
             index
             element={
               <Registro
-                jugadores={jugadores}
-                setJugador={setJugador}
-                eliminarJugador={eliminarJugador}
-                edit={false}
+                setParticipantes={setParticipantes}
+                setParticipante={setParticipante}
+                participantes={participantes}
+                participante={participante}
+                usuarioAutenticado={usuarioAutenticado}
               />
             }
           />
-          <Route path="nuevo" element={<NuevoParticipante />} />
+          <Route
+            path="nuevo"
+            element={
+              <NuevoParticipante
+                setParticipantes={setParticipantes}
+                setParticipante={setParticipante}
+                participantes={participantes}
+                participante={participante}
+                usuarioAutenticado={usuarioAutenticado}
+                eliminarParticipante={eliminarParticipante}
+              />
+            }
+          />
           <Route />
         </Route>
       </Routes>

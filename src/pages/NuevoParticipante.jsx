@@ -1,9 +1,30 @@
 import React from "react";
-
-export default function NuevoParticipante() {
+import FormularioSorteo from "../components/FormularioSorteo";
+import ListadoParticipante from "../components/ListadoParticipantes";
+export default function NuevoParticipante({
+  setParticipantes,
+  setParticipante,
+  participantes,
+  participante,
+  usuarioAutenticado,
+  eliminarParticipante,
+}) {
   return (
-    <div className="container-fluid contenido-principal pt-10 mb-14">
-      <h1>Formulario</h1>
+    <div className="container-fluid contenido-principal pt-10 mb-14 md:flex">
+      <FormularioSorteo
+        setJugadores={setParticipantes}
+        jugadores={participantes}
+        jugador={participante}
+        setJugador={setParticipante}
+        usuarioAutenticado={usuarioAutenticado}
+      />
+      <ListadoParticipante
+        participantes={participantes}
+        setParticipantes={setParticipantes}
+        setParticipante={setParticipante}
+        usuarioAutenticado={usuarioAutenticado}
+        eliminarParticipante={eliminarParticipante}
+      />
     </div>
   );
 }
