@@ -10,12 +10,12 @@ const ListadoParticipante = ({
   edit,
 }) => {
   return (
-    <div className={"md:w-1/3 lg:w-3/5 mx-auto"}>
+    <div className=" md:w-4/5 lg:w-3/5 w-100 mx-auto h-screen ">
       <h2 className="mb-5 text-center text-white font-bold text uppercase">
         Listado de Participantes
       </h2>
       <div className="mx-auto  w-3/5  text-center ">
-        <div className="bg-white rounded-lg ml-auto px-5 p-5 w-4/12">
+        <div className="bg-white rounded-lg ml-auto px-5 p-5 lg:w-4/12 w-100">
           <h2>
             Cantidad de participantes : <strong>{participantes.length}</strong>
           </h2>

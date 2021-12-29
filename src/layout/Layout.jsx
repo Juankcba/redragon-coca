@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Layout = ({ usuarioAutenticado }) => {
   const [visible, setVisible] = useState(false);
   return (
-    <div className="container-fluid mx-auto h-screen">
+    <div className="container-fluid mx-auto ">
       {visible && (
         <div className=" z-10 absolute top-0 left-0 w-full h-screen   ">
           <div className="bg-slate-500 opacity-50 w-full h-screen  relative z-0 top-0 left-0"></div>
@@ -29,9 +29,12 @@ const Layout = ({ usuarioAutenticado }) => {
         </div>
       )}
       <Header setVisible={setVisible} />
-
-      <Outlet />
-      <Footer />
+      <section className="h-full min-h-screen mb-10 pb-10 overflow-y-scroll">
+        <Outlet />
+      </section>
+      <section className="h-full mt-10 pt-10 ">
+        <Footer />
+      </section>
     </div>
   );
 };

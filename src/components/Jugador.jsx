@@ -66,7 +66,7 @@ function Jugador({
         {jugador.proximo && <p>Próximo</p>}
         {jugador.jugando && <p>Jugando</p>}
         {edit && usuarioAutenticado && (
-          <div className="flex justify-between mt-10">
+          <div className="flex justify-between flex-col lg:flex-row gap-1 mt-10">
             <button
               type="button"
               className="bg-black py-2 px-5  text-white font-bold uppercase rounded-lg hover:bg-gray-800"
@@ -88,6 +88,7 @@ function Jugador({
             >
               Jugando
             </button>
+
             <button
               type="button"
               className="bg-cyan-500 py-2 px-5  text-white font-bold uppercase rounded-lg hover:bg-cyan-800"

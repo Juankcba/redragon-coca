@@ -4,7 +4,7 @@ function Footer() {
   let year = new Date();
 
   return (
-    <footer className="  h-24  w-full text-center text-white">
+    <footer className="h-max  w-full text-center text-white">
       <img
         src={latas}
         alt="latas"

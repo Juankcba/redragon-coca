@@ -66,6 +66,9 @@ function Registro({
   function findPrize() {
     return prizes.find((prizeState) => prizeState.name == prize) || {};
   }
+  function getImageUrl(name) {
+    return new URL(`${name}`, import.meta.url).href;
+  }
   function setImageToItem() {
     let imgUrl =
       prizes.find((prizeState) => prizeState.name == prize).url || "";
@@ -84,8 +87,8 @@ function Registro({
       <h1 className="mb-5 text-center text-white font-bold">
         ¡Participa por increíbles premios!
       </h1>
-      <div className="container flex justify-between mt-10 lg:px-10 mx-auto ">
-        <div className="w-6/12 mt-20">
+      <div className="container lg:flex lg:justify-between mt-10 lg:px-10 mx-auto ">
+        <div className="lg:w-6/12 mt-20">
           {sorteando ? (
             ganador != "" ? (
               <div className="border-4 p-10">
@@ -102,7 +105,11 @@ function Registro({
                   Ganaste un
                 </h4>
                 <div className="flex justify-center mt-10">
-                  <img src={findPrize().url} width="100" height="50" />
+                  <img
+                    src={getImageUrl(findPrize().url)}
+                    width="100"
+                    height="50"
+                  />
                 </div>
                 <p className="text-white text-center uppercase">
                   {findPrize().name}
@@ -131,7 +138,7 @@ function Registro({
                     };
                   }}
                   itemImage={findPrize().url}
-                  btnIamge={findPrize().url}
+                  btnIamge={getImageUrl("../../assets/img/button.png")}
                   validate={(next) => {
                     if (lotteryTimes <= 0) {
                       alert("No more lottery times! Now give you 5 times.");
@@ -176,7 +183,11 @@ function Registro({
                     </option>
                   ))}
                 </select>
-                <img src={findPrize().url} width="100" height="50" />
+                <img
+                  src={getImageUrl(findPrize().url)}
+                  width="100"
+                  height="50"
+                />
               </div>
               <input
                 type="submit"

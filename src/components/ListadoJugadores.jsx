@@ -10,7 +10,9 @@ const ListadoJugadores = ({
   setJugadores,
 }) => {
   return (
-    <div className={edit ? "md:w-1/2 lg:w-3/5 " : " pb-10 md:flex  "}>
+    <div
+      className={edit ? "w-full md:w-1/2 lg:w-3/5 " : "w-full pb-10 md:flex  "}
+    >
       {!edit && (
         <div className="w-full md:w-1/2 lg:w-3/5  mt-10 ">
           <h2 className="text-center text-white font-bold uppercase mb-5">
@@ -25,7 +27,7 @@ const ListadoJugadores = ({
             Jugadores Participantes
           </h2>
         ) : null}
-        <div className=" h-64 md:h-auto overflow-y-scroll no-scrollbar w-10/12 mx-auto">
+        <div className=" h-64 md:h-auto   w-11/12 lg:w-10/12 mx-auto">
           {jugadores.map((jugador) => (
             <Jugador
               key={jugador.id}

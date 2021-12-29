@@ -12,7 +12,7 @@ function NuevoJugador({
   usuarioAutenticado,
 }) {
   return (
-    <div className="container h-auto mx-auto mt-12  md:flex ">
+    <div className="container h-full mx-auto mt-12  md:flex ">
       <Formulario
         jugadores={jugadores}
         jugador={jugador}
