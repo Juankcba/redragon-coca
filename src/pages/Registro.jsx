@@ -73,7 +73,7 @@ function Registro({
     let array = [];
 
     participantes.map((participante) =>
-      array.push({ ...participante, img: "" })
+      array.push({ ...participante, img: imgUrl })
     );
     setParticipants(array);
   }
