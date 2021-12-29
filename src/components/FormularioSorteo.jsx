@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import firebase from "../../firebase";
 function FormularioSorteo({ setJugadores, jugadores, jugador, setJugador }) {
   const [name, setName] = useState("");
+  const [apellido, setApellido] = useState("");
   const [email, setEmail] = useState("");
   const [dni, setDni] = useState("");
 
@@ -12,6 +13,7 @@ function FormularioSorteo({ setJugadores, jugadores, jugador, setJugador }) {
       setName(jugador.name);
       setEmail(jugador.email);
       setDni(jugador.dni);
+      setApellido(jugador.apellido);
     }
   }, [jugador]);
 
@@ -54,13 +56,20 @@ function FormularioSorteo({ setJugadores, jugadores, jugador, setJugador }) {
             name: name,
             email: email,
             dni: dni,
+            apellido: apellido,
             create: new Date(),
             id: jugador.id,
           })
           .then(() => {
             const jugadoresAcutalizados = jugadores.map((jugadorState) =>
               jugadorState.id === jugador.id
-                ? { name: name, email: email, dni: dni, id: jugador.id }
+                ? {
+                    name: name,
+                    apellido: apellido,
+                    email: email,
+                    dni: dni,
+                    id: jugador.id,
+                  }
                 : jugadorState
             );
             setJugadores(jugadoresAcutalizados);
@@ -92,6 +101,7 @@ function FormularioSorteo({ setJugadores, jugadores, jugador, setJugador }) {
           .doc(id)
           .set({
             name: name,
+            apellido: apellido,
             email: email,
             dni: dni,
             create: new Date(),
@@ -102,6 +112,7 @@ function FormularioSorteo({ setJugadores, jugadores, jugador, setJugador }) {
               ...jugadores,
               {
                 name: name,
+                apellido: apellido,
                 email: email,
                 dni: dni,
                 create: new Date(),
@@ -115,6 +126,7 @@ function FormularioSorteo({ setJugadores, jugadores, jugador, setJugador }) {
     }
 
     setName("");
+    setApellido("");
     setDni("");
     setEmail("");
   };
@@ -143,6 +155,19 @@ function FormularioSorteo({ setJugadores, jugadores, jugador, setJugador }) {
             value={name}
             placeholder="Nombre del Jugador"
             onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div className="mb-5">
+          <label htmlFor="lastname" className="block text-gray-700 uppercase">
+            Apellido del jugador
+          </label>
+          <input
+            id="lastname"
+            className="border-2 w-full p-2 mt-2 rounded-md"
+            type="text"
+            value={apellido}
+            placeholder="Apellido del Jugador"
+            onChange={(e) => setApellido(e.target.value)}
           />
         </div>
 

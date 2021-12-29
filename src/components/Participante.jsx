@@ -33,7 +33,10 @@ function Participante({
       }
     >
       <p className="font-bold mb-3 text-gray-700 uppercase">
-        Nombre: {""} <span className="font-normal">{jugador.name}</span>
+        Nombre: {""}{" "}
+        <span className="font-normal">
+          {jugador.name} {jugador.apellido}
+        </span>
       </p>
       <p className="font-bold mb-3 text-gray-700 uppercase">
         E-mail: {""}

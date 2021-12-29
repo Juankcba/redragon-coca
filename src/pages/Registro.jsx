@@ -80,6 +80,10 @@ function Registro({
   function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
   }
+  function getRow() {
+    console.log(participants.length / 2);
+    return Math.ceil(participants.length / 4) + 1;
+  }
   return (
     <div className="container-fluid contenido-principal pt-10 mb-14">
       <h1 className="mb-5 text-center text-white font-bold lg:text-5xl ">
@@ -94,7 +98,7 @@ function Registro({
                   ¡Felicitaciones!
                 </h3>
                 <h2 className="text-white text-center uppercase mt-10 text-5xl">
-                  {ganador.name}
+                  {ganador.name} {ganador.apellido}
                 </h2>
                 <h3 className="text-white text-center uppercase mt-10 text-5xl">
                   DNI: {ganador.dni}
@@ -121,7 +125,7 @@ function Registro({
               <>
                 <AppleLottery
                   list={participants}
-                  rowCount={3}
+                  rowCount={getRow()}
                   style={{
                     width: "600px",
                     height: "600px",
@@ -132,6 +136,12 @@ function Registro({
                     };
                   }}
                   itemImage={findPrize().url}
+                  itemImageStyle={{
+                    height: "100px",
+                    width: "auto",
+                    objectFit: "contain",
+                    objectPosition: "center",
+                  }}
                   btnIamge={
                     "https://res.cloudinary.com/dghlpdczf/image/upload/v1640810866/redragon/button_p3yq6e.png"
                   }
