@@ -23,37 +23,37 @@ function Registro({
       id: 1,
       name: "Redragon HA300 Scepter Pro",
       cantidad: 4,
-      url: "./../../assets/img/redragon/HA300_PNGHQ_2.png",
+      url: "/../../assets/img/redragon/HA300_PNGHQ_2.png",
     },
     {
       id: 2,
       name: "Redragon M607 Griffin",
       cantidad: 2,
-      url: "./../../assets/img/redragon/M607_PNGHQ_1.png",
+      url: "/../../assets/img/redragon/M607_PNGHQ_1.png",
     },
     {
       id: 3,
       name: "Redragon M719 Invader RGB",
       cantidad: 6,
-      url: "./../../assets/img/redragon/M719_PNGHQ_1.png",
+      url: "/../../assets/img/redragon/M719_PNGHQ_1.png",
     },
     {
       id: 4,
       name: "Redragon M908 Impact",
       cantidad: 6,
-      url: "./../../assets/img/redragon/M908_PNGHQ_1.png",
+      url: "/../../assets/img/redragon/M908_PNGHQ_1.png",
     },
     {
       id: 5,
       name: "Redragon K503 Harpe PRO",
       cantidad: 5,
-      url: "./../../assets/img/redragon/K503A_HQ_1.png",
+      url: "/../../assets/img/redragon/K503A_HQ_1.png",
     },
     {
       id: 6,
       name: "Redragon M711 Cobra FPS",
       cantidad: 3,
-      url: "./../../assets/img/redragon/M711FPS.png",
+      url: "/../../assets/img/redragon/M711FPS.png",
     },
   ]);
 
