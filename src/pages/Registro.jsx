@@ -3,14 +3,7 @@ import FormularioSorteo from "../components/FormularioSorteo";
 import ListadoParticipante from "../components/ListadoParticipantes";
 import AppleLottery from "react-lottery";
 import "react-lottery/dist/index.css";
-import HA300 from "../../assets/img/redragon/HA300_PNGHQ_2.png";
-import M607 from "../../assets/img/redragon/M607_PNGHQ_1.png";
-import M719 from "../../assets/img/redragon/M719_PNGHQ_1.png";
-import M908 from "../../assets/img/redragon/M908_PNGHQ_1.png";
-import K503 from "../../assets/img/redragon/K503A_HQ_1.png";
-import M711FPS from "../../assets/img/redragon/M711FPS.png";
 
-import button from "../../assets/img/button.png";
 let lotteryTimes = 5;
 
 function Registro({
@@ -30,37 +23,37 @@ function Registro({
       id: 1,
       name: "Redragon HA300 Scepter Pro",
       cantidad: 4,
-      url: HA300,
+      url: "https://res.cloudinary.com/dghlpdczf/image/upload/v1640810872/redragon/HA300_PNGHQ_2_qd8kfm.png",
     },
     {
       id: 2,
       name: "Redragon M607 Griffin",
       cantidad: 2,
-      url: M607,
+      url: "https://res.cloudinary.com/dghlpdczf/image/upload/v1640810874/redragon/M607_PNGHQ_1_lge8it.png",
     },
     {
       id: 3,
       name: "Redragon M719 Invader RGB",
       cantidad: 6,
-      url: M719,
+      url: "https://res.cloudinary.com/dghlpdczf/image/upload/v1640810873/redragon/M719_PNGHQ_1_ezpl6f.png",
     },
     {
       id: 4,
       name: "Redragon M908 Impact",
       cantidad: 6,
-      url: M908,
+      url: "https://res.cloudinary.com/dghlpdczf/image/upload/v1640810873/redragon/M908_PNGHQ_1_t78t2m.png",
     },
     {
       id: 5,
       name: "Redragon K503 Harpe PRO",
       cantidad: 5,
-      url: K503,
+      url: "https://res.cloudinary.com/dghlpdczf/image/upload/v1640810873/redragon/K503A_HQ_1_owfr6h.png",
     },
     {
       id: 6,
       name: "Redragon M711 Cobra FPS",
       cantidad: 3,
-      url: M711FPS,
+      url: "https://res.cloudinary.com/dghlpdczf/image/upload/v1640810873/redragon/M711FPS_esij6y.png",
     },
   ]);
 
@@ -139,7 +132,9 @@ function Registro({
                     };
                   }}
                   itemImage={findPrize().url}
-                  // btnIamge={button}
+                  btnIamge={
+                    "https://res.cloudinary.com/dghlpdczf/image/upload/v1640810866/redragon/button_p3yq6e.png"
+                  }
                   validate={(next) => {
                     if (lotteryTimes <= 0) {
                       alert("No more lottery times! Now give you 5 times.");
