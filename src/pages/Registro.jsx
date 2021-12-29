@@ -3,7 +3,14 @@ import FormularioSorteo from "../components/FormularioSorteo";
 import ListadoParticipante from "../components/ListadoParticipantes";
 import AppleLottery from "react-lottery";
 import "react-lottery/dist/index.css";
+import HA300 from "../../assets/img/redragon/HA300_PNGHQ_2.png";
+import M607 from "../../assets/img/redragon/M607_PNGHQ_1.png";
+import M719 from "../../assets/img/redragon/M719_PNGHQ_1.png";
+import M908 from "../../assets/img/redragon/M908_PNGHQ_1.png";
+import K503 from "../../assets/img/redragon/K503A_HQ_1.png";
+import M711FPS from "../../assets/img/redragon/M711FPS.png";
 
+import button from "../../assets/img/button.png";
 let lotteryTimes = 5;
 
 function Registro({
@@ -23,37 +30,37 @@ function Registro({
       id: 1,
       name: "Redragon HA300 Scepter Pro",
       cantidad: 4,
-      url: "/../../assets/img/redragon/HA300_PNGHQ_2.png",
+      url: HA300,
     },
     {
       id: 2,
       name: "Redragon M607 Griffin",
       cantidad: 2,
-      url: "/../../assets/img/redragon/M607_PNGHQ_1.png",
+      url: M607,
     },
     {
       id: 3,
       name: "Redragon M719 Invader RGB",
       cantidad: 6,
-      url: "/../../assets/img/redragon/M719_PNGHQ_1.png",
+      url: M719,
     },
     {
       id: 4,
       name: "Redragon M908 Impact",
       cantidad: 6,
-      url: "/../../assets/img/redragon/M908_PNGHQ_1.png",
+      url: M908,
     },
     {
       id: 5,
       name: "Redragon K503 Harpe PRO",
       cantidad: 5,
-      url: "/../../assets/img/redragon/K503A_HQ_1.png",
+      url: K503,
     },
     {
       id: 6,
       name: "Redragon M711 Cobra FPS",
       cantidad: 3,
-      url: "/../../assets/img/redragon/M711FPS.png",
+      url: M711FPS,
     },
   ]);
 
@@ -66,16 +73,14 @@ function Registro({
   function findPrize() {
     return prizes.find((prizeState) => prizeState.name == prize) || {};
   }
-  function getImageUrl(name) {
-    return new URL(`${name}`, import.meta.url).href;
-  }
+
   function setImageToItem() {
     let imgUrl =
       prizes.find((prizeState) => prizeState.name == prize).url || "";
     let array = [];
 
     participantes.map((participante) =>
-      array.push({ ...participante, img: imgUrl })
+      array.push({ ...participante, img: "" })
     );
     setParticipants(array);
   }
@@ -105,11 +110,7 @@ function Registro({
                   Ganaste un
                 </h4>
                 <div className="flex justify-center mt-10">
-                  <img
-                    src={getImageUrl(findPrize().url)}
-                    width="100"
-                    height="50"
-                  />
+                  <img src={findPrize().url} width="100" height="50" />
                 </div>
                 <p className="text-white text-center uppercase">
                   {findPrize().name}
@@ -138,7 +139,7 @@ function Registro({
                     };
                   }}
                   itemImage={findPrize().url}
-                  btnIamge={getImageUrl("../../assets/img/button.png")}
+                  // btnIamge={button}
                   validate={(next) => {
                     if (lotteryTimes <= 0) {
                       alert("No more lottery times! Now give you 5 times.");
@@ -183,11 +184,7 @@ function Registro({
                     </option>
                   ))}
                 </select>
-                <img
-                  src={getImageUrl(findPrize().url)}
-                  width="100"
-                  height="50"
-                />
+                <img src={findPrize().url} width="100" height="50" />
               </div>
               <input
                 type="submit"
