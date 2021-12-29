@@ -88,7 +88,7 @@ function Registro({
         <div className="w-6/12 mt-20">
           {sorteando ? (
             ganador != "" ? (
-              <>
+              <div className="border-4 p-10">
                 <h3 className="text-white text-center  text-5xl">
                   ¡Felicitaciones!
                 </h3>
@@ -99,7 +99,7 @@ function Registro({
                   {ganador.dni}
                 </h3>
                 <h4 className="text-white text-center uppercase mt-10 text-3xl">
-                  Ganaste un{" "}
+                  Ganaste un
                 </h4>
                 <div className="flex justify-center mt-10">
                   <img src={findPrize().url} width="100" height="50" />
@@ -108,12 +108,14 @@ function Registro({
                   {findPrize().name}
                 </p>
                 <button
-                  onClick={() => setSorteando(false)}
+                  onClick={() => {
+                    setGanador(""), setSorteando(false);
+                  }}
                   className="mt-10 bg-white px-10 h-10 mx-auto w-/3 rounded-lg"
                 >
                   Volver
                 </button>
-              </>
+              </div>
             ) : (
               <>
                 <AppleLottery
