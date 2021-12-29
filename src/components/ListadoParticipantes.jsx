@@ -17,7 +17,7 @@ const ListadoParticipante = ({
       <div className="mx-auto  w-3/5  text-center ">
         <div className="bg-white rounded-lg ml-auto px-5 p-5 lg:w-4/12 w-100">
           <h2>
-            Cantidad de participantes : <strong>{participantes.length}</strong>
+            Participantes : <strong>{participantes.length}</strong>
           </h2>
         </div>
       </div>

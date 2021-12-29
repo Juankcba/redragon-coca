@@ -82,7 +82,7 @@ function Registro({
   }
   return (
     <div className="container-fluid contenido-principal pt-10 mb-14">
-      <h1 className="mb-5 text-center text-white font-bold">
+      <h1 className="mb-5 text-center text-white font-bold lg:text-5xl ">
         ¡Participa por increíbles premios!
       </h1>
       <div className="container lg:flex lg:justify-between mt-10 lg:px-10 mx-auto ">
