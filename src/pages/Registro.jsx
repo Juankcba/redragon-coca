@@ -97,7 +97,7 @@ function Registro({
                   {ganador.name}
                 </h2>
                 <h3 className="text-white text-center uppercase mt-10 text-5xl">
-                  {ganador.dni}
+                  DNI: {ganador.dni}
                 </h3>
                 <h4 className="text-white text-center uppercase mt-10 text-3xl">
                   Ganaste un
