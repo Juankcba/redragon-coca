@@ -4,7 +4,7 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [game, setGame] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     //validacion
     if ([name, email, game].includes("")) {
       console.log("hay al menos un campo vacio");
@@ -120,6 +120,7 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
     setName("");
     setGame("");
     setEmail("");
+    setLoading(false);
   };
   return (
     <div className="md:w-1/2 lg:w-2/5">
@@ -184,11 +185,17 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
           </select>
         </div>
 
-        <input
+        <button
           type="submit"
-          value={jugador.id ? "Guardar Registro " : "Registrate"}
-          className="text-white uppercase font-bold bg-red-600 w-full p-3 hover:bg-red-900 cursor-pointer rounded-lg transition-color"
-        />
+          className="text-white flex justify-center gap-2 uppercase font-bold bg-red-600 w-full p-3 hover:bg-red-900 cursor-pointer rounded-lg transition-color"
+        >
+          {jugador.id ? "Guardar Registro " : "Registrate"}
+          {loading && (
+            <div class=" flex justify-center items-center">
+              <div class="animate-spin rounded-full h-7 w-7 border-b-4 border-white"></div>
+            </div>
+          )}
+        </button>
       </form>
     </div>
   );

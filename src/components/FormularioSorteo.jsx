@@ -5,7 +5,7 @@ function FormularioSorteo({ setJugadores, jugadores, jugador, setJugador }) {
   const [apellido, setApellido] = useState("");
   const [email, setEmail] = useState("");
   const [dni, setDni] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ function FormularioSorteo({ setJugadores, jugadores, jugador, setJugador }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     //validacion
     if ([name, email, dni].includes("")) {
       console.log("hay al menos un campo vacio");
@@ -74,6 +74,7 @@ function FormularioSorteo({ setJugadores, jugadores, jugador, setJugador }) {
             );
             setJugadores(jugadoresAcutalizados);
             setJugador({});
+            setLoading(false);
           });
       } catch (error) {
         console.log(error);
@@ -119,6 +120,7 @@ function FormularioSorteo({ setJugadores, jugadores, jugador, setJugador }) {
                 id: id,
               },
             ]);
+            setLoading(false);
           });
       } catch (error) {
         console.log(error);
@@ -129,6 +131,7 @@ function FormularioSorteo({ setJugadores, jugadores, jugador, setJugador }) {
     setApellido("");
     setDni("");
     setEmail("");
+    setLoading(false);
   };
   return (
     <div className="md:w-1/2 lg:w-2/5">
@@ -198,11 +201,17 @@ function FormularioSorteo({ setJugadores, jugadores, jugador, setJugador }) {
           />
         </div>
 
-        <input
+        <button
           type="submit"
-          value={jugador.id ? "Guardar Registro " : "Registrate"}
-          className="text-white uppercase font-bold bg-red-600 w-full p-3 hover:bg-red-900 cursor-pointer rounded-lg transition-color"
-        />
+          className=" flex gap-2  justify-center text-white uppercase font-bold bg-red-600 w-full p-3 hover:bg-red-900 cursor-pointer rounded-lg transition-color"
+        >
+          {jugador.id ? "Guardar Registro " : "Registrate"}
+          {loading && (
+            <div class=" flex justify-center items-center">
+              <div class="animate-spin rounded-full h-7 w-7 border-b-4 border-white"></div>
+            </div>
+          )}
+        </button>
       </form>
     </div>
   );
