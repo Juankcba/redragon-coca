@@ -7,16 +7,25 @@ const ListadoParticipante = ({
   eliminarParticipante,
   setParticipante,
   usuarioAutenticado,
+  edit,
 }) => {
   return (
-    <div className={"md:w-1/2 lg:w-3/5 "}>
-      <h2 className="mb-5 text-center text-white font-bold">
+    <div className={"md:w-1/3 lg:w-3/5 mx-auto"}>
+      <h2 className="mb-5 text-center text-white font-bold text uppercase">
         Listado de Participantes
       </h2>
+      <div className="mx-auto  w-3/5  text-center ">
+        <div className="bg-white rounded-lg ml-auto px-5 p-5 w-4/12">
+          <h2>
+            Cantidad de participantes : <strong>{participantes.length}</strong>
+          </h2>
+        </div>
+      </div>
       {participantes.map((participante) => (
         <Participante
+          key={participante.id}
           jugador={participante}
-          edit={true}
+          edit={edit}
           setJugadores={setParticipantes}
           usuarioAutenticado={usuarioAutenticado}
           jugadores={participantes}

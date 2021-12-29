@@ -19,6 +19,7 @@ export default function NuevoParticipante({
         usuarioAutenticado={usuarioAutenticado}
       />
       <ListadoParticipante
+        edit={true}
         participantes={participantes}
         setParticipantes={setParticipantes}
         setParticipante={setParticipante}

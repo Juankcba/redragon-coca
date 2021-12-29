@@ -114,7 +114,7 @@ function IniciarSesion({ usuarioAutenticado, guardarUsuarioAutenticado }) {
             </form>
           </div>
         ) : (
-          <div className="container contenido-principal  mt-20">
+          <div className="container contenido-principal  mt-20 mx-auto">
             <h1 className="text-center text-white font-bold">
               Bienvenido {usuarioAutenticado.email}
             </h1>
