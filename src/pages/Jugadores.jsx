@@ -27,7 +27,7 @@ const Jugadores = ({ jugadores, setJugador, edit, eliminarJugador }) => {
               <h1 className="text-white text-center font-bold uppercase mt-20 text-5xl">
                 Próximos jugadores
               </h1>
-              <section className="w-100 pr-20 pl-20 mt-20 mx-auto ">
+              <section className="w-100 lg:pr-20 lg:pl-20 mt-20 mx-auto ">
                 {proximos.map((jugador) => (
                   <Jugador jugador={jugador} />
                 ))}
@@ -35,8 +35,8 @@ const Jugadores = ({ jugadores, setJugador, edit, eliminarJugador }) => {
             </div>
           </div>
           <div className="jugadores-right pr-20 pl-20 mx-auto ">
-            <Webcam className="p-5 mt-10 pt-0 mx-auto rounded-lg" />
-            <div className="flex justify-center mt-12">
+            <Webcam className="p-5 mt-10 pt-0 mx-auto rounded-lg webcam" />
+            <div className="flex justify-center w-10/12 mx-auto mt-12 flex-col   2xl:flex-row">
               {jugando.length && (
                 <>
                   <div className="jugador-vs-title">
@@ -44,7 +44,7 @@ const Jugadores = ({ jugadores, setJugador, edit, eliminarJugador }) => {
                       {jugando[0].name}
                     </h2>
                   </div>
-                  <img src={vs} alt="vs" />
+                  <img src={vs} alt="vs" className="img-vs" />
                   {jugando && jugando.length > 1 && (
                     <div className="jugador-vs-title ">
                       <h2 className="text-ellipsis overflow-hidden">
