@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import swal from "sweetalert";
 import firebase from "../../firebase";
 function Jugador({
@@ -10,6 +10,9 @@ function Jugador({
   setJugadores,
   jugadores,
 }) {
+  const [loading, setLoading] = useState(false);
+  const [loadingNext, setLoadingNext] = useState(false);
+  const [loadingHide, setLoadingHide] = useState(false);
   const handleEliminar = () => {
     swal({
       title: "Vas a eliminar a un jugador",
@@ -27,11 +30,19 @@ function Jugador({
     });
   };
   const setProximo = async (jugador, state) => {
+    if (state == 3) setLoadingHide(true);
+    if (state == 2) setLoadingNext(true);
+    if (state == 1) setLoading(true);
     try {
       await firebase.db
         .collection("jugadores")
         .doc(jugador.id)
-        .update(jugador)
+        .update({
+          ...jugador,
+          ocultar: state == 3 ? true : false,
+          jugando: state == 1 ? true : false,
+          proximo: state == 2 ? true : false,
+        })
         .then(() => {
           const jugadoresAcutalizados = jugadores.map((jugadorState) =>
             jugadorState.id === jugador.id
@@ -48,10 +59,17 @@ function Jugador({
               : jugadorState
           );
           setJugadores(jugadoresAcutalizados);
+          if (state == 3) setLoadingHide(false);
+          if (state == 2) setLoadingNext(false);
+          if (state == 1) setLoading(false);
         });
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
+    swal("Poof! ese jugador ha sido editado!", {
+      icon: "success",
+    });
   };
   if (edit) {
     return (
@@ -63,8 +81,8 @@ function Jugador({
           Juego: {""}
           <span className="font-normal">{jugador.game}</span>
         </p>
-        {jugador.proximo && <p>Próximo</p>}
-        {jugador.jugando && <p>Jugando</p>}
+        {jugador.proximo && <p>Estado : Próximo</p>}
+        {jugador.jugando && <p>Estado : Jugando</p>}
         {edit && usuarioAutenticado && (
           <div className="flex justify-between flex-col lg:flex-row gap-1 mt-10">
             <button
@@ -76,25 +94,34 @@ function Jugador({
             </button>
             <button
               type="button"
-              className="bg-blue-500 py-2 px-5  text-white font-bold uppercase rounded-lg hover:bg-blue-800"
+              className="bg-blue-500 py-2 px-5  text-white flex justify-between gap-1  font-bold uppercase rounded-lg hover:bg-blue-800"
               onClick={() => setProximo(jugador, 3)}
             >
               Ocultar
+              {loadingHide && (
+                <div className="animate-spin rounded-full h-7 w-7 border-b-4 border-white"></div>
+              )}
             </button>
             <button
               type="button"
-              className="bg-violet-500 py-2 px-5  text-white font-bold uppercase rounded-lg hover:bg-violet-800"
+              className="bg-violet-500 py-2 px-5 flex justify-between gap-1 text-white font-bold uppercase rounded-lg hover:bg-violet-800"
               onClick={() => setProximo(jugador, 1)}
             >
               Jugando
+              {loading && (
+                <div className="animate-spin rounded-full h-7 w-7 border-b-4 border-white"></div>
+              )}
             </button>
 
             <button
               type="button"
-              className="bg-cyan-500 py-2 px-5  text-white font-bold uppercase rounded-lg hover:bg-cyan-800"
+              className="bg-cyan-500 py-2 px-5  text-white flex justify-between gap-1  font-bold uppercase rounded-lg hover:bg-cyan-800"
               onClick={() => setProximo(jugador, 2)}
             >
               Próximo
+              {loadingNext && (
+                <div className="animate-spin rounded-full h-7 w-7 border-b-4 border-white"></div>
+              )}
             </button>
             <button
               type="button"

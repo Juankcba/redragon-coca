@@ -97,6 +97,9 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
             name: name,
             email: email,
             game: game,
+            ocultar: false,
+            jugando: false,
+            proximo: false,
             create: new Date(),
             id: id,
           })
@@ -191,8 +194,8 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
         >
           {jugador.id ? "Guardar Registro " : "Registrate"}
           {loading && (
-            <div class=" flex justify-center items-center">
-              <div class="animate-spin rounded-full h-7 w-7 border-b-4 border-white"></div>
+            <div className=" flex justify-center items-center">
+              <div className="animate-spin rounded-full h-7 w-7 border-b-4 border-white"></div>
             </div>
           )}
         </button>
