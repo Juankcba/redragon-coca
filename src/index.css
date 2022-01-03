@@ -5,7 +5,7 @@
 
 
 body{
-  background-color: #B70007;
+  background-color: #000000;
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
@@ -77,5 +77,77 @@ box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0p
 .react-lottery-apple-item-image{
   height: 75px !important;
   width: auto !important;
+  
+}
+
+.contenido-minimo {
+  min-height: calc(100vh - 232px) ;
+  background-color: #E51B29;
+  
+  }
+@media (max-width: 768px) {
+  .contenido-minimo {
+  min-height: 592px ;
+  }
+}
+
+.image-botella-left{
+  position: absolute;
+  bottom:104px;
+  left:0;
+  height: 71%;
+  
+}
+.contenido-jugadores{
+  margin: 0 0 0 auto; 
+  padding: 56px 0 56px 180px;
+  display: flex;
+  
+  width: calc(100% - 220px);
+  justify-content: space-between;
+  height: max-content;
+
+}
+.jugadores-left{
+  border-right: 12px solid  #FFFFFF;
+  width: 50%;
+  min-height: 70vh;
+}
+.jugadores-right{
+  
+  width: 50%;
+  min-height: 70vh;
+}
+
+.img-gamer-zone{
+  width: auto;
+  height: 224px;
+  object-fit: cover;
+  object-position: center;
+  margin: 0 auto;
+}
+.jugador-vs-title{
+  height: 213px;
+  
+  width: 100%;
+  margin: 0 10px;
+ 
+  font-size: xx-large;
+  background-image: url('./assets/img/vs-name.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 0% 90%;
+ 
+}
+
+
+.jugador-vs-title h2{
+  line-height:  213px;
+  color:white;
+  text-align: center;
+  width: 300px;
+  height: 200px;
+  margin-left:20px;
+  
   
 }

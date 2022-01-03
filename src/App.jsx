@@ -8,6 +8,7 @@ import firebase from "../firebase";
 import ListadoJugadores from "./components/ListadoJugadores";
 import Registro from "./pages/Registro";
 import NuevoParticipante from "./pages/NuevoParticipante";
+import Jugadores from "./pages/Jugadores";
 function App() {
   const [participantes, setParticipantes] = useState([]);
   const [participante, setParticipante] = useState({});
@@ -154,7 +155,7 @@ function App() {
           <Route
             index
             element={
-              <ListadoJugadores
+              <Jugadores
                 jugadores={jugadores}
                 setJugador={setJugador}
                 eliminarJugador={eliminarJugador}

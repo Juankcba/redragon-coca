@@ -147,8 +147,8 @@ function Jugador({
             Juego: {""}
             <span className="font-normal">{jugador.game}</span>
           </p>
-          {jugador.proximo && <p>Próximo</p>}
-          {jugador.jugando && <p>Jugando</p>}
+          {/* {jugador.proximo && <p>Próximo</p>}
+          {jugador.jugando && <p>Jugando</p>} */}
           {edit && usuarioAutenticado && (
             <div className="flex justify-between mt-10">
               <button

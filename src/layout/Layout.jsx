@@ -29,12 +29,11 @@ const Layout = ({ usuarioAutenticado }) => {
         </div>
       )}
       <Header setVisible={setVisible} />
-      <section className="h-full min-h-screen mb-10 pb-10 overflow-y-scroll">
+      <section className="contenido-minimo overflow-y-scroll">
         <Outlet />
       </section>
-      <section className="h-full mt-10 pt-10 ">
-        <Footer />
-      </section>
+
+      <Footer />
     </div>
   );
 };
