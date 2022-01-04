@@ -78,7 +78,7 @@ function Jugador({
             <h2>Sos el próximo para jugar ${jugador.game}. Toda la Suerte!</h2>
 
             </br>
-            <img src="https://firebasestorage.googleapis.com/v0/b/redragon-ff0b0.appspot.com/o/Recurso%206.png?alt=media&token=6e4ee9d8-e1ca-4264-81f2-4befdd308a5d" alt="img-" />
+            <img src="https://firebasestorage.googleapis.com/v0/b/redragon-ff0b0.appspot.com/o/Recurso%207.png?alt=media&token=d0f6e3b9-35af-4556-8f62-f96b8b54f3dd" alt="img-" />
             </div>
             </code> `,
             },
