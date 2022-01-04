@@ -16,10 +16,11 @@ const Layout = ({ usuarioAutenticado }) => {
               <button onClick={() => setVisible(!visible)}>Cerrar</button>
             </div>
             <nav className="flex flex-col" onClick={() => setVisible(false)}>
-              <Link to="/registro">Sorteo</Link>
+              <Link to="/registro-jugadores">Registro</Link>
               <Link to="/jugadores">Jugadores</Link>
               {usuarioAutenticado && (
                 <>
+                  <Link to="/registro">Sorteo</Link>
                   <Link to="/jugadores/nuevo">Agregar Jugadores</Link>
                   <Link to="/registro/nuevo">Agregar Participante</Link>
                 </>

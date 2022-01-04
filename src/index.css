@@ -3,9 +3,13 @@
 @tailwind utilities;
 
 
-
+::-webkit-scrollbar {
+  display: none;
+}
 body{
   background-color: #000000;
+  
+
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
@@ -98,6 +102,14 @@ box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0p
   height: 71%;
   
 }
+.image-botella-right{
+  position: absolute;
+  bottom:104px;
+  right:0;
+  height: 71%;
+  
+}
+
 
 .contenido-jugadores{
   margin: 0 0 0 auto; 
@@ -159,6 +171,13 @@ box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0p
   top:90px;
   left:0;
 }
+
+.gamer-zone-rd{
+  width: auto;
+  height: 335px;
+  object-fit: contain;
+  object-position: center;
+}
 @media (max-width: 1440px) {
   .image-botella-left{
     display: none;
@@ -213,3 +232,7 @@ box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0p
 }
 }
 
+.react-lottery-apple-slotbtn{
+  width: 100% !important;
+  height: 100% !important;
+}

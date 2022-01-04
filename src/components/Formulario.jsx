@@ -126,7 +126,7 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
     setLoading(false);
   };
   return (
-    <div className="md:w-1/2 lg:w-2/5">
+    <div className="md:w-3/5 xl:w-3/5 w-full">
       <h2 className="mb-5 text-center text-white font-bold">
         BATALLA DEL VERANO{" "}
       </h2>

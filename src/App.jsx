@@ -9,6 +9,7 @@ import ListadoJugadores from "./components/ListadoJugadores";
 import Registro from "./pages/Registro";
 import NuevoParticipante from "./pages/NuevoParticipante";
 import Jugadores from "./pages/Jugadores";
+import RegistroJugadores from "./pages/RegistroJugadores";
 function App() {
   const [participantes, setParticipantes] = useState([]);
   const [participante, setParticipante] = useState({});
@@ -148,6 +149,37 @@ function App() {
             />
           }
         ></Route>
+        <Route
+          path="/registro-jugadores"
+          element={<Layout usuarioAutenticado={usuarioAutenticado} />}
+        >
+          <Route
+            index
+            element={
+              <RegistroJugadores
+                jugadores={jugadores}
+                jugador={jugador}
+                setJugadores={setJugadores}
+                setJugador={setJugador}
+                eliminarJugador={eliminarJugador}
+                edit={false}
+              />
+            }
+          />
+          <Route
+            path="nuevo"
+            element={
+              <NuevoJugador
+                usuarioAutenticado={usuarioAutenticado}
+                jugadores={jugadores}
+                jugador={jugador}
+                setJugadores={setJugadores}
+                setJugador={setJugador}
+                eliminarJugador={eliminarJugador}
+              />
+            }
+          />
+        </Route>
         <Route
           path="/jugadores"
           element={<Layout usuarioAutenticado={usuarioAutenticado} />}

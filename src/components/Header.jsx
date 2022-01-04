@@ -4,7 +4,7 @@ import logored from "../../assets/img/redragon-logo.png";
 function Header({ setVisible }) {
   return (
     <div className="bg-white h-32 ">
-      <div className="flex justify-between w-10/12 mx-auto pt-10 h-28">
+      <div className="flex justify-between w-10/12 mx-auto pt-10  pb-10 h-28">
         <img
           src={logo}
           alt="logo-coca-cola"
@@ -15,7 +15,7 @@ function Header({ setVisible }) {
         <img
           src={logored}
           alt="logo-redragon"
-          className="w-auto object-contain h-14 "
+          className="w-auto object-contain h-16 "
         />
       </div>
       <div className="divisor-header w-full"></div>
