@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../../firebase";
 import swal from "sweetalert";
+
 function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -104,7 +105,7 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
             create: new Date(),
             id: id,
           })
-          .then(() => {
+          .then(async () => {
             setJugadores([
               ...jugadores,
               {
@@ -119,6 +120,27 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
               icon: "success",
             });
           });
+
+        await firebase.db
+          .collection("mail")
+          .add({
+            to: email,
+            message: {
+              subject: "¡Bienvenido a #GAMERZONE de COCA-COLA y REDRAGON!",
+              text: `Ya estas registrado para jugar ${game}. Toda la Suerte!`,
+              html: `<code>
+              <div >
+              <h1>Hola ${name},</h1>
+              </br>
+              <h2>Ya estas registrado para jugar ${game}. Toda la Suerte!</h2>
+
+              </br>
+
+              </div>
+              </code> `,
+            },
+          })
+          .then(() => console.log("Queued email for delivery!"));
       } catch (error) {
         console.log(error);
       }

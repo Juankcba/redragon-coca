@@ -63,6 +63,28 @@ function Jugador({
           if (state == 2) setLoadingNext(false);
           if (state == 1) setLoading(false);
         });
+      if (state == 2) {
+        await firebase.db
+          .collection("mail")
+          .add({
+            to: jugador.email,
+            message: {
+              subject: "¡Sos el Próximo ! #GAMERZONE de COCA-COLA y REDRAGON",
+              text: `Ya estas registrado para jugar ${jugador.game}. Toda la Suerte!`,
+              html: `<code>
+            <div >
+            <h1>Hola ${jugador.name},</h1>
+            </br>
+            <h2>Sos el próximo para jugar ${jugador.game}. Toda la Suerte!</h2>
+
+            </br>
+
+            </div>
+            </code> `,
+            },
+          })
+          .then(() => console.log("Queued email for delivery!"));
+      }
     } catch (error) {
       console.log(error);
       setLoading(false);
