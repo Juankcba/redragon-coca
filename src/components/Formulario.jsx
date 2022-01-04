@@ -135,7 +135,7 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
               <h2>Ya estas registrado para jugar ${game}. Toda la Suerte!</h2>
 
               </br>
-
+              <img src="https://firebasestorage.googleapis.com/v0/b/redragon-ff0b0.appspot.com/o/Recurso%206.png?alt=media&token=6e4ee9d8-e1ca-4264-81f2-4befdd308a5d" alt="img-" />
               </div>
               </code> `,
             },
