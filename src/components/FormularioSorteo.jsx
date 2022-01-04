@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../../firebase";
+import swal from "sweetalert";
 function FormularioSorteo({ setJugadores, jugadores, jugador, setJugador }) {
   const [name, setName] = useState("");
   const [apellido, setApellido] = useState("");
@@ -74,6 +75,7 @@ function FormularioSorteo({ setJugadores, jugadores, jugador, setJugador }) {
             );
             setJugadores(jugadoresAcutalizados);
             setJugador({});
+
             setLoading(false);
           });
       } catch (error) {
@@ -120,6 +122,9 @@ function FormularioSorteo({ setJugadores, jugadores, jugador, setJugador }) {
                 id: id,
               },
             ]);
+            swal("¡Felicitaciones! ", {
+              icon: "success",
+            });
             setLoading(false);
           });
       } catch (error) {
@@ -134,7 +139,7 @@ function FormularioSorteo({ setJugadores, jugadores, jugador, setJugador }) {
     setLoading(false);
   };
   return (
-    <div className="md:w-1/2 lg:w-2/5">
+    <div className="w-full xl:w-3/5">
       <h2 className="mb-5 text-center text-white font-bold">
         BATALLA DEL VERANO{" "}
       </h2>

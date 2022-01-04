@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../../firebase";
+import swal from "sweetalert";
 function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -114,6 +115,9 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
                 id: id,
               },
             ]);
+            swal("¡ Ya estas registrado, Mucha Suerte !  ", {
+              icon: "success",
+            });
           });
       } catch (error) {
         console.log(error);
