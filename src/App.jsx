@@ -197,6 +197,7 @@ function App() {
                 jugadores={jugadores}
                 setJugador={setJugador}
                 eliminarJugador={eliminarJugador}
+                setJugadores={setJugadores}
                 edit={false}
               />
             }

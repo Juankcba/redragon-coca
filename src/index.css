@@ -2,7 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-
+:root {
+  --azul: #3b82f6;
+  --blanco: #ffffff;
+  --gris-claro: #f5f5f5;
+  --gris: #94a3b8;
+  --gris-oscuro: #64748b;
+  --negro: #000;
+}
 ::-webkit-scrollbar {
   display: none;
 }
@@ -263,4 +270,33 @@ box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12), 0p
 .react-lottery-apple-slotbtn{
   width: 100% !important;
   height: 100% !important;
+}
+
+/*** SWIPE LIST OVERRIDES **/
+
+.swipe-action__leading {
+  background-color: #0000ff;
+  color: var(--blanco);
+  border-radius: 10px 0 0 10px;
+  
+  
+  
+  
+}
+
+.swipe-action__trailing {
+  background-color: #db2777;
+  border-radius: 0 10px  10px 0;
+  color: var(--blanco);
+}
+
+.swipeable-list .swipe-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  text-align: right;
+}
+.swipeable-list {
+   margin: 2rem 0;
 }

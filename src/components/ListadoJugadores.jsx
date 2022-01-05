@@ -18,6 +18,7 @@ const ListadoJugadores = ({
     setJugadoresVs(data);
     data = jugadores.filter((item) => item.proximo == true);
     setJugadoresNext(data);
+    setJugadoresFilter(jugadores);
   }, [jugadores]);
 
   const filterJugadores = (state) => {
@@ -33,6 +34,16 @@ const ListadoJugadores = ({
 
     if (state == 4) {
       setJugadoresFilter(jugadores);
+    }
+    if (state == 5) {
+      setJugadoresFilter(
+        jugadores.filter(
+          (item) =>
+            item.ocultar == false &&
+            item.jugando == false &&
+            item.proximo == false
+        )
+      );
     }
   };
   return (
@@ -101,6 +112,13 @@ const ListadoJugadores = ({
                   className="bg-cyan-500 p-3 rounded-lg text-white font-bold "
                 >
                   Ver Próximos
+                </button>
+                <button
+                  type="button"
+                  onClick={() => filterJugadores(5)}
+                  className="bg-cyan-500 p-3 rounded-lg text-white font-bold "
+                >
+                  Ver Siguientes
                 </button>
                 <button
                   type="button"

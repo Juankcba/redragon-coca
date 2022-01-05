@@ -65,7 +65,16 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
           .then(() => {
             const jugadoresAcutalizados = jugadores.map((jugadorState) =>
               jugadorState.id === jugador.id
-                ? { name: name, email: email, game: game, id: jugador.id }
+                ? {
+                    name: name,
+                    email: email,
+                    game: game,
+                    id: jugador.id,
+                    ocultar: false,
+                    jugando: false,
+                    proximo: false,
+                    create: jugador.create,
+                  }
                 : jugadorState
             );
             setJugadores(jugadoresAcutalizados);
