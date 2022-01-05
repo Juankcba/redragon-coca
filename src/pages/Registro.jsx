@@ -124,7 +124,7 @@ function Registro({
                     onClick={() => {
                       setGanador(""), setSorteando(false);
                     }}
-                    className="mt-10 bg-white px-10 h-10 mx-auto w-/3 rounded-lg"
+                    className="mt-10 bg-white px-10 h-10 mx-auto w-2/3 rounded-lg"
                   >
                     Volver
                   </button>

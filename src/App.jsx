@@ -15,7 +15,9 @@ function App() {
   const [participantes, setParticipantes] = useState([]);
   const [participante, setParticipante] = useState({});
   const [jugadores, setJugadores] = useState([]);
+  const [juegos, setJuegos] = useState([]);
   const [jugador, setJugador] = useState({});
+  const [disponible, setDisponible] = useState(false);
   const [usuarioAutenticado, guardarUsuarioAutenticado] = useState(null);
   useEffect(() => {
     const checkUser = async () => {
@@ -137,16 +139,61 @@ function App() {
     // };
     getProductsApi();
   }, []);
+  useEffect(() => {
+    const getProductsApi = async () => {
+      let array = [];
+
+      const result = await firebase.db
+        .collection("juegos")
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            array.push({
+              ...doc.data(),
+              id: doc.id,
+            });
+          });
+          setJuegos(array);
+        })
+        .catch(function (error) {
+          console.log("Error getting documents: ", error);
+          return null;
+        });
+
+      return array;
+    };
+
+    getProductsApi();
+  }, []);
+  useEffect(() => {
+    const getProductsApi = async () => {
+      const result = await firebase.db
+        .collection("registro")
+        .doc("disponible")
+        .get()
+        .then(function (querySnapshot) {
+          setDisponible(querySnapshot.data().state);
+        })
+        .catch(function (error) {
+          console.log("Error getting documents: ", error);
+          return null;
+        });
+    };
+
+    getProductsApi();
+  }, []);
 
   return (
     <Layout>
       <RegistroJugadores
+        disponible={disponible}
         jugadores={jugadores}
         jugador={jugador}
         setJugadores={setJugadores}
         setJugador={setJugador}
         eliminarJugador={eliminarJugador}
         edit={false}
+        juegos={juegos}
       />
     </Layout>
   );

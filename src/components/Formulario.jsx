@@ -2,7 +2,15 @@ import React, { useState, useEffect } from "react";
 import firebase from "../../firebase";
 import swal from "sweetalert";
 
-function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
+function Formulario({
+  setJugadores,
+  jugadores,
+  jugador,
+  setJugador,
+  juegos,
+  disponible,
+  setRegistro,
+}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [game, setGame] = useState("");
@@ -60,12 +68,25 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
             ocultar: false,
             jugando: false,
             proximo: false,
+            falto: false,
+            disponible: disponible,
             id: jugador.id,
           })
           .then(() => {
             const jugadoresAcutalizados = jugadores.map((jugadorState) =>
               jugadorState.id === jugador.id
-                ? { name: name, email: email, game: game, id: jugador.id }
+                ? {
+                    name: name,
+                    email: email,
+                    game: game,
+                    id: jugador.id,
+                    ocultar: false,
+                    jugando: false,
+                    proximo: false,
+
+                    falto: false,
+                    disponible: disponible,
+                  }
                 : jugadorState
             );
             setJugadores(jugadoresAcutalizados);
@@ -76,21 +97,6 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
       }
     } else {
       try {
-        // const url = import.meta.env.VITE_API_URL + "/jugadores";
-        // const respuesta = await fetch(url, {
-        //   method: "POST",
-        //   body: JSON.stringify({
-        //     name: name,
-        //     email: email,
-        //     game: game,
-        //     create: new Date(),
-        //     id: generarID(),
-        //   }),
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        // });
-        // const resultado = await respuesta.json();
         let id = generarID();
         await firebase.db
           .collection("jugadores")
@@ -102,6 +108,8 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
             ocultar: false,
             jugando: false,
             proximo: false,
+            falto: false,
+            disponible: disponible,
             create: new Date(),
             id: id,
           })
@@ -112,6 +120,11 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
                 name: name,
                 email: email,
                 game: game,
+                ocultar: false,
+                jugando: false,
+                proximo: false,
+                falto: false,
+                disponible: disponible,
                 create: new Date(),
                 id: id,
               },
@@ -127,13 +140,18 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
             to: email,
             message: {
               subject: "¡Bienvenido a #GAMERZONE de COCA-COLA y REDRAGON!",
-              text: `Ya estas registrado para jugar ${game}. Toda la Suerte!`,
+              text: disponible
+                ? `Ya estas registrado para jugar ${game}. Toda la Suerte!`
+                : `En este momento no esta disponible el registro, pero participas por increibles premios`,
               html: `<code>
               <div >
               <h1>Hola ${name},</h1>
               </br>
-              <h2>Ya estas registrado para jugar ${game}. Toda la Suerte!</h2>
-
+              ${
+                disponible
+                  ? `<h2>Ya estas registrado para jugar ${game}. Toda la Suerte!</h2>`
+                  : `<h2>En este momento no esta disponible el registro, pero participas por increibles premios</h2>`
+              }
               </br>
               <img src="https://firebasestorage.googleapis.com/v0/b/redragon-ff0b0.appspot.com/o/Recurso%206.png?alt=media&token=6e4ee9d8-e1ca-4264-81f2-4befdd308a5d" alt="img-" />
               </div>
@@ -150,6 +168,7 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
     setGame("");
     setEmail("");
     setLoading(false);
+    setRegistro(true);
   };
   return (
     <div className="md:w-3/5 xl:w-3/5 w-full">
@@ -207,10 +226,11 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
             <option value="" disabled>
               Selecciona una opcion
             </option>
-            <option value="Lol">Lol</option>
-            <option value="Counter">Counter</option>
-            <option value="Fornite">Fornite</option>
-            <option value="Minecraft">Minecraft</option>
+            {juegos.map((juego) => (
+              <option key={juego.id} value={juego.name}>
+                {juego.name}
+              </option>
+            ))}
           </select>
         </div>
 
