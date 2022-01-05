@@ -11,6 +11,34 @@ body{
   
 
 }
+.logo-coca-header{
+  width: auto;
+  height: 70px;
+  object-fit: contain;
+  object-position: center;
+  align-self: center;
+}
+.logo-coca-footer{
+  width: auto;
+  height: 50px;
+  object-fit: contain;
+  object-position: center;
+  align-self: center;
+}
+.logo-header{
+  width: auto;
+  height: 100px;
+  object-fit: contain;
+  object-position: center;
+  align-self: center;
+}
+.logo-footer{
+  width: auto;
+  height: 100px;
+  object-fit: contain;
+  object-position: center;
+  align-self: center;
+}
 /* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
   display: none;

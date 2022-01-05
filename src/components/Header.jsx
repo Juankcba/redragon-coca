@@ -8,7 +8,7 @@ function Header({ setVisible }) {
         <img
           src={logo}
           alt="logo-coca-cola"
-          className="logo-header"
+          className="logo-coca-header"
           onClick={() => setVisible(true)}
         />
 
