@@ -82,12 +82,12 @@ function Registro({
               text: `¡Haz Gando!`,
               html: `<code>
               <div >
-              <h1>Hola ${ganador.name},</h1>
+              <h1>${ganador.name},  ¡FELICITACIONES GANASTE ${prizeObject.name}! </h1>
               </br>
              
-               <h2>¡Felicitaciones! Retira tu premio, comunícate con el Staff de Redragon </h2>
+               <h2>Acercate al <b>#GAMERZONE</b> y solicitá tu premio, mostrando este correo. </h2>
 
-               <p>${prizeObject.name}</p>
+               
                <img src=${prizeObject.url} alt=${prizeObject.name} style="width:'auto';height:300px;object-fit:'contain'"/>
                </br>
 

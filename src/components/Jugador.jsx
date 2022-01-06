@@ -179,9 +179,9 @@ function Jugador({
               text: `Ya estas registrado para jugar ${jugador.game}. Toda la Suerte!`,
               html: `<code>
             <div >
-            <h1>Hola ${jugador.name},</h1>
+            <h1>${jugador.name},  LLEGÓ TU TURNO, ¡SOS EL PRÓXIMO!</h1>
             </br>
-            <h2>Sos el próximo para jugar ${jugador.game}. Toda la Suerte!</h2>
+            <h2>Te invitamos a que te acerques al <b>#GAMERZONE</b> para sumarte a tu próxima batalla.</h2>
 
             </br>
             <img src="https://firebasestorage.googleapis.com/v0/b/redragon-ff0b0.appspot.com/o/Recurso%207.png?alt=media&token=d0f6e3b9-35af-4556-8f62-f96b8b54f3dd" alt="img-" />

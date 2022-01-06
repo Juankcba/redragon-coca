@@ -163,8 +163,17 @@ function Formulario({
               </br>
               ${
                 disponible
-                  ? `<h2>Ya estas registrado para jugar ${game}. Toda la Suerte!</h2>`
-                  : `<h2>En este momento no esta disponible el registro, pero participas por increibles premios</h2>`
+                  ? `<h1>¡Bienvenido al #GAMERZONE!  ${name}</h1>
+                  <h2>¡Te confirmamos que ya estás registrado para jugar  ${game}!</h2>
+                  
+                  <h4>Es importante que estés atento a tu mail,  te enviaremos un correo, para avisarte que llegó tu turno.
+                  Además, estaremos anunciando los próximos jugadores en la pantalla próxima al espacio <b>#GAMERZONE</b>.</h4>`
+                  : `<h2>${name}  UPS!! ya no hay cupos disponibles para jugar hoy en el <b>#GAMERZONE</b> </h2>.
+
+                  <p>Igualmente te contamos que con tu registro estas participando en un SORTEO por periféricos REDRAGON.
+
+                  ¡Seguinos en Instagram y entérate cuándo es el sorteo y quien es el ganador, como así también en que paradores estaremos los próximos días para que te sumes a la batalla!
+                  IG: <a href="https://www.instagram.com/redragonar/">https://www.instagram.com/redragonar/</a></p>`
               }
 
               </br>
