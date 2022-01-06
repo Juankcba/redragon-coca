@@ -22,13 +22,16 @@ const RegistroJugadores = ({
           {!disponible && (
             <>
               <h3 className="text-white text-center lg:text-2xl mt-10">
-                En este momento no esta disponible el registro
+                En este momento no está disponible el registro
               </h3>
               <h4 className="text-white text-center lg:text-2xl mt-10">
-                Estas participando por increibles premios
+                Estas participando por increíbles premios
               </h4>
             </>
           )}
+          <h5>
+            No te olvides de revisar tu casilla de correo y correo no deseado.
+          </h5>
           <div className="w-full lg:w-6/12 flex justify-center mx-auto flex-1">
             <img
               src={gamerzonerd}
