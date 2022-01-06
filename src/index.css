@@ -18,6 +18,14 @@ body{
   
 
 }
+.qrcode-img{
+  width: auto;
+  height: 300px;
+  object-fit: contain;
+  object-position: center;
+  align-self: center;
+  margin : 0 auto;
+}
 .logo-coca-header{
   width: auto;
   height: 70px;

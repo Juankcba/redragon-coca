@@ -2,7 +2,14 @@ import React, { useState, useEffect } from "react";
 import firebase from "../../firebase";
 import swal from "sweetalert";
 
-function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
+function Formulario({
+  setJugadores,
+  jugadores,
+  jugador,
+  setJugador,
+  disponible,
+  juegos,
+}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [game, setGame] = useState("");
@@ -60,6 +67,8 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
             ocultar: false,
             jugando: false,
             proximo: false,
+            disponible: true,
+            falto: false,
             id: jugador.id,
           })
           .then(() => {
@@ -73,6 +82,8 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
                     ocultar: false,
                     jugando: false,
                     proximo: false,
+                    disponible: true,
+                    falto: false,
                     create: jugador.create,
                   }
                 : jugadorState
@@ -111,6 +122,8 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
             ocultar: false,
             jugando: false,
             proximo: false,
+            disponible: disponible,
+            falto: false,
             create: new Date(),
             id: id,
           })
@@ -121,6 +134,11 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
                 name: name,
                 email: email,
                 game: game,
+                ocultar: false,
+                jugando: false,
+                proximo: false,
+                disponible: disponible,
+                falto: false,
                 create: new Date(),
                 id: id,
               },
@@ -136,12 +154,18 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
             to: email,
             message: {
               subject: "¡Bienvenido a #GAMERZONE de COCA-COLA y REDRAGON!",
-              text: `Ya estas registrado para jugar ${game}. Toda la Suerte!`,
+              text: disponible
+                ? `Ya estas registrado para jugar ${game}. Toda la Suerte!`
+                : `En este momento no esta disponible el registro, pero participas por increibles premios`,
               html: `<code>
               <div >
               <h1>Hola ${name},</h1>
               </br>
-              <h2>Ya estas registrado para jugar ${game}. Toda la Suerte!</h2>
+              ${
+                disponible
+                  ? `<h2>Ya estas registrado para jugar ${game}. Toda la Suerte!</h2>`
+                  : `<h2>En este momento no esta disponible el registro, pero participas por increibles premios</h2>`
+              }
 
               </br>
               <img src="https://firebasestorage.googleapis.com/v0/b/redragon-ff0b0.appspot.com/o/Recurso%206.png?alt=media&token=6e4ee9d8-e1ca-4264-81f2-4befdd308a5d" alt="img-" />
@@ -216,10 +240,11 @@ function Formulario({ setJugadores, jugadores, jugador, setJugador }) {
             <option value="" disabled>
               Selecciona una opcion
             </option>
-            <option value="Lol">Lol</option>
-            <option value="Counter">Counter</option>
-            <option value="Fornite">Fornite</option>
-            <option value="Minecraft">Minecraft</option>
+            {juegos.map((juego) => (
+              <option key={juego.id} value={juego.name}>
+                {juego.name}
+              </option>
+            ))}
           </select>
         </div>
 

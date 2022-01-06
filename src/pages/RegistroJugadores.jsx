@@ -8,12 +8,16 @@ const RegistroJugadores = ({
   setJugadores,
   eliminarJugador,
   usuarioAutenticado,
+  disponible,
+  juegos,
 }) => {
   return (
     <main>
       <div className="flex justify-center xl:gap-20 p-4 xl:p-20 lg:flex-row flex-col">
         <div className="w-full  lg:w-6/12 flex justify-center min-w-min mx-auto ">
           <Formulario
+            disponible={disponible}
+            juegos={juegos}
             jugadores={jugadores}
             jugador={jugador}
             setJugadores={setJugadores}

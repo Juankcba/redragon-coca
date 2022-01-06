@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-
+import {
+  format,
+  formatDistanceToNowStrict,
+  formatDistance,
+  formatRelative,
+  subDays,
+} from "date-fns";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import IniciarSesion from "./layout/IniciarSesion";
 import NuevoJugador from "./pages/NuevoJugador";
@@ -11,11 +17,14 @@ import NuevoParticipante from "./pages/NuevoParticipante";
 import Jugadores from "./pages/Jugadores";
 import RegistroJugadores from "./pages/RegistroJugadores";
 import RegistroGanadores from "./pages/RegistroGanadores";
+import ConfigurarSorteo from "./pages/ConfigurarSorteo";
 function App() {
   const [participantes, setParticipantes] = useState([]);
   const [participante, setParticipante] = useState({});
   const [jugadores, setJugadores] = useState([]);
   const [jugador, setJugador] = useState({});
+  const [disponible, setDisponible] = useState(false);
+  const [juegos, setJuegos] = useState([]);
   const [usuarioAutenticado, guardarUsuarioAutenticado] = useState(null);
   useEffect(() => {
     const checkUser = async () => {
@@ -81,10 +90,19 @@ function App() {
         .get()
         .then(function (querySnapshot) {
           querySnapshot.forEach(function (doc) {
-            array.push({
-              ...doc.data(),
-              id: doc.id,
-            });
+            let day = toDateTime(doc.data().create.seconds);
+
+            let actual = new Date();
+
+            if (
+              day.getDay() == actual.getDay() &&
+              day.getMonth() == actual.getMonth()
+            ) {
+              array.push({
+                ...doc.data(),
+                id: doc.id,
+              });
+            }
           });
           setJugadores(array);
         })
@@ -114,10 +132,19 @@ function App() {
         .get()
         .then(function (querySnapshot) {
           querySnapshot.forEach(function (doc) {
-            array.push({
-              ...doc.data(),
-              id: doc.id,
-            });
+            let day = toDateTime(doc.data().create.seconds);
+
+            let actual = new Date();
+
+            if (
+              day.getDay() == actual.getDay() &&
+              day.getMonth() == actual.getMonth()
+            ) {
+              array.push({
+                ...doc.data(),
+                id: doc.id,
+              });
+            }
           });
           setParticipantes(array);
         })
@@ -135,6 +162,49 @@ function App() {
 
     //   setJugadores(jugadoresLocal);
     // };
+    getProductsApi();
+  }, []);
+  useEffect(() => {
+    const getProductsApi = async () => {
+      let array = [];
+
+      const result = await firebase.db
+        .collection("juegos")
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            array.push({
+              ...doc.data(),
+              id: doc.id,
+            });
+          });
+          setJuegos(array);
+        })
+        .catch(function (error) {
+          console.log("Error getting documents: ", error);
+          return null;
+        });
+
+      return array;
+    };
+
+    getProductsApi();
+  }, []);
+  useEffect(() => {
+    const getProductsApi = async () => {
+      const result = await firebase.db
+        .collection("registro")
+        .doc("disponible")
+        .get()
+        .then(function (querySnapshot) {
+          setDisponible(querySnapshot.data().state);
+        })
+        .catch(function (error) {
+          console.log("Error getting documents: ", error);
+          return null;
+        });
+    };
+
     getProductsApi();
   }, []);
 
@@ -158,6 +228,8 @@ function App() {
             index
             element={
               <RegistroJugadores
+                disponible={disponible}
+                juegos={juegos}
                 jugadores={jugadores}
                 jugador={jugador}
                 setJugadores={setJugadores}
@@ -194,6 +266,8 @@ function App() {
             index
             element={
               <Jugadores
+                disponible={disponible}
+                juegos={juegos}
                 jugadores={jugadores}
                 setJugador={setJugador}
                 eliminarJugador={eliminarJugador}
@@ -206,6 +280,8 @@ function App() {
             path="nuevo"
             element={
               <NuevoJugador
+                disponible={disponible}
+                juegos={juegos}
                 usuarioAutenticado={usuarioAutenticado}
                 jugadores={jugadores}
                 jugador={jugador}
@@ -247,9 +323,49 @@ function App() {
           />
           <Route />
         </Route>
+        <Route
+          path="/configuracion"
+          element={<Layout usuarioAutenticado={usuarioAutenticado} />}
+        >
+          <Route
+            index
+            element={
+              <ConfigurarSorteo
+                jugadores={jugadores}
+                setJugador={setJugador}
+                eliminarJugador={eliminarJugador}
+                setJugadores={setJugadores}
+                disponible={disponible}
+                setDisponible={setDisponible}
+                edit={false}
+              />
+            }
+          />
+          <Route
+            path="nuevo"
+            element={
+              <NuevoJugador
+                disponible={disponible}
+                juegos={juegos}
+                usuarioAutenticado={usuarioAutenticado}
+                jugadores={jugadores}
+                jugador={jugador}
+                setJugadores={setJugadores}
+                setJugador={setJugador}
+                eliminarJugador={eliminarJugador}
+              />
+            }
+          />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
+}
+
+export function toDateTime(secs) {
+  var t = new Date(1970, 0, 1); // Epoch
+  t.setSeconds(secs);
+  return t;
 }
 
 export default App;

@@ -10,6 +10,8 @@ function NuevoJugador({
   setJugadores,
   eliminarJugador,
   usuarioAutenticado,
+  disponible,
+  juegos,
 }) {
   return (
     <div className="container h-full mx-auto mt-12  md:flex ">
@@ -18,6 +20,8 @@ function NuevoJugador({
         jugador={jugador}
         setJugadores={setJugadores}
         setJugador={setJugador}
+        disponible={disponible}
+        juegos={juegos}
       />
       <ListadoJugadores
         jugadores={jugadores}

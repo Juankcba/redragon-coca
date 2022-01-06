@@ -24,6 +24,7 @@ const Layout = ({ usuarioAutenticado }) => {
                   <Link to="/registro">Sorteo</Link>
                   <Link to="/jugadores/nuevo">Agregar Jugadores</Link>
                   <Link to="/registro/nuevo">Agregar Participante</Link>
+                  <Link to="/configurar-sorteo">Configuración</Link>
                 </>
               )}
             </nav>

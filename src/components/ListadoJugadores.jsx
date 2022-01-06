@@ -31,11 +31,14 @@ const ListadoJugadores = ({
     if (state == 3) {
       setJugadoresFilter(jugadores.filter((item) => item.proximo == true));
     }
-
     if (state == 4) {
+      setJugadoresFilter(jugadores.filter((item) => item.falto == true));
+    }
+
+    if (state == 5) {
       setJugadoresFilter(jugadores);
     }
-    if (state == 5) {
+    if (state == 6) {
       setJugadoresFilter(
         jugadores.filter(
           (item) =>
@@ -91,41 +94,48 @@ const ListadoJugadores = ({
             : null}
           {edit && (
             <>
-              <div className="flex gap-2 mt-5">
+              <div className="flex justify-between mt-5">
                 <button
                   type="button"
                   onClick={() => filterJugadores(1)}
                   className="bg-blue-500  p-3 rounded-lg text-white font-bold "
                 >
-                  Ver Ocultos
+                  Ocultos
                 </button>
                 <button
                   type="button"
                   onClick={() => filterJugadores(2)}
                   className="bg-violet-500 p-3 rounded-lg text-white font-bold "
                 >
-                  Ver Jugando
+                  Jugando
                 </button>
                 <button
                   type="button"
                   onClick={() => filterJugadores(3)}
                   className="bg-cyan-500 p-3 rounded-lg text-white font-bold "
                 >
-                  Ver Próximos
-                </button>
-                <button
-                  type="button"
-                  onClick={() => filterJugadores(5)}
-                  className="bg-cyan-500 p-3 rounded-lg text-white font-bold "
-                >
-                  Ver Siguientes
+                  Próximos
                 </button>
                 <button
                   type="button"
                   onClick={() => filterJugadores(4)}
                   className="bg-cyan-500 p-3 rounded-lg text-white font-bold "
                 >
-                  Ver Todos
+                  Faltaron
+                </button>
+                <button
+                  type="button"
+                  onClick={() => filterJugadores(6)}
+                  className="bg-cyan-500 p-3 rounded-lg text-white font-bold "
+                >
+                  Siguientes
+                </button>
+                <button
+                  type="button"
+                  onClick={() => filterJugadores(5)}
+                  className="bg-cyan-500 p-3 rounded-lg text-white font-bold "
+                >
+                  Todos
                 </button>
               </div>
               {jugadoresFilter.map((jugador) => (

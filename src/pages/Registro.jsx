@@ -6,6 +6,7 @@ import "react-lottery/dist/index.css";
 import botella from "../../assets/img/botella.svg";
 import botella2 from "../../assets/img/botella-2.svg";
 import gamerzone from "../../assets/img/gamerzone.svg";
+import firebase from "../../firebase";
 let lotteryTimes = 5;
 
 function Registro({
@@ -20,45 +21,92 @@ function Registro({
   const [participants, setParticipants] = useState([]);
   const [prize, setPrize] = useState("Redragon HA300 Scepter Pro");
   const [sorteando, setSorteando] = useState(false);
-  const [prizes, setPrizes] = useState([
-    {
-      id: 1,
-      name: "Redragon HA300 Scepter Pro",
-      cantidad: 4,
-      url: "https://res.cloudinary.com/dghlpdczf/image/upload/v1640810872/redragon/HA300_PNGHQ_2_qd8kfm.png",
-    },
-    {
-      id: 2,
-      name: "Redragon M607 Griffin",
-      cantidad: 2,
-      url: "https://res.cloudinary.com/dghlpdczf/image/upload/v1640810874/redragon/M607_PNGHQ_1_lge8it.png",
-    },
-    {
-      id: 3,
-      name: "Redragon M719 Invader RGB",
-      cantidad: 6,
-      url: "https://res.cloudinary.com/dghlpdczf/image/upload/v1640810873/redragon/M719_PNGHQ_1_ezpl6f.png",
-    },
-    {
-      id: 4,
-      name: "Redragon M908 Impact",
-      cantidad: 6,
-      url: "https://res.cloudinary.com/dghlpdczf/image/upload/v1640810873/redragon/M908_PNGHQ_1_t78t2m.png",
-    },
-    {
-      id: 5,
-      name: "Redragon K503 Harpe PRO",
-      cantidad: 5,
-      url: "https://res.cloudinary.com/dghlpdczf/image/upload/v1640810873/redragon/K503A_HQ_1_owfr6h.png",
-    },
-    {
-      id: 6,
-      name: "Redragon M711 Cobra FPS",
-      cantidad: 3,
-      url: "https://res.cloudinary.com/dghlpdczf/image/upload/v1640810873/redragon/M711FPS_esij6y.png",
-    },
-  ]);
+  const [prizes, setPrizes] = useState([]);
 
+  useEffect(() => {
+    const getProductsApi = async () => {
+      let array = [];
+      const result = await firebase.db
+        .collection("sorteos")
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            console.log(doc.data());
+            if (doc.data().quantity > 0) {
+              array.push({
+                ...doc.data(),
+                id: doc.id,
+              });
+            }
+          });
+          setPrizes(array);
+        })
+        .catch(function (error) {
+          console.log("Error getting documents: ", error);
+          return null;
+        });
+      return array;
+    };
+    getProductsApi();
+  }, []);
+
+  useEffect(() => {
+    const updateApi = async () => {
+      let prizeObject = prizes.find((item) => item.name == prize);
+      console.log("objeto de premio", prizeObject);
+      try {
+        const result = await firebase.db
+          .collection("sorteos")
+          .doc(prizeObject.id)
+          .update({
+            ...prizeObject,
+            quantity: prizeObject.quantity - 1,
+          })
+          .then(() => {
+            const premiosActualizado = prizes.map((item) =>
+              item.id === prizeObject.id
+                ? { ...item, quantity: item.quantity - 1 }
+                : item
+            );
+            setPrizes(premiosActualizado);
+          })
+          .catch(function (error) {
+            console.log("Error getting documents: ", error);
+          });
+        await firebase.db
+          .collection("mail")
+          .add({
+            to: ganador.email,
+            message: {
+              subject: "Ganaste en #GAMERZONE de COCA-COLA y REDRAGON!",
+              text: `¡Haz Gando!`,
+              html: `<code>
+              <div >
+              <h1>Hola ${ganador.name},</h1>
+              </br>
+             
+               <h2>¡Felicitaciones! Retira tu premio, comunícate con el Staff de Redragon </h2>
+
+               <p>${prizeObject.name}</p>
+               <img src=${prizeObject.url} alt=${prizeObject.name} style="width:'auto';height:300px;object-fit:'contain'"/>
+               </br>
+
+              </br>
+              <img src="https://firebasestorage.googleapis.com/v0/b/redragon-ff0b0.appspot.com/o/Recurso%206.png?alt=media&token=6e4ee9d8-e1ca-4264-81f2-4befdd308a5d" alt="img-" />
+              </div>
+              </code> `,
+            },
+          })
+          .then(() => console.log("Queued email for delivery!"));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (ganador != "") {
+      console.log("debo descontar 1 ", prize);
+      updateApi();
+    }
+  }, [ganador]);
   const handleSubmit = (e) => {
     console.log("sorteando");
     setImageToItem();
@@ -83,7 +131,9 @@ function Registro({
     return Math.floor(Math.random() * Math.floor(max));
   }
   function getRow() {
-    console.log(participants.length / 2);
+    if (participants.length < 10) {
+      return 5;
+    }
     return Math.ceil(participants.length / 4) + 1;
   }
   return (
@@ -136,7 +186,7 @@ function Registro({
                     rowCount={getRow()}
                     style={{
                       width: "60vw",
-                      height: "600px",
+                      height: "60vh",
                     }}
                     itemStyle={(item, index, isActive) => {
                       return {
@@ -198,6 +248,9 @@ function Registro({
                     value={prize.name}
                     onChange={(e) => setPrize(e.target.value)}
                   >
+                    <option value="" disabled>
+                      Seleccione el premio
+                    </option>
                     {prizes.map((prize) => (
                       <option key={prize.id} value={prize.name}>
                         {prize.name}
