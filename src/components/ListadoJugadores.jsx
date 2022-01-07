@@ -161,9 +161,7 @@ const ListadoJugadores = ({
                   value={juegoFilter}
                   onChange={(e) => setJuegoFilter(e.target.value)}
                 >
-                  <option value="" disabled>
-                    Todos
-                  </option>
+                  <option value="">Todos</option>
                   {juegos.map((juego) => (
                     <option value={juego.name} key={juego.id}>
                       {juego.name}
