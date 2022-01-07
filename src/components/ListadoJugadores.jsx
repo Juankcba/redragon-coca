@@ -8,10 +8,15 @@ const ListadoJugadores = ({
   setJugador,
   eliminarJugador,
   setJugadores,
+  juegos,
 }) => {
   const [jugadoresVs, setJugadoresVs] = useState([]);
   const [jugadoresNext, setJugadoresNext] = useState([]);
   const [jugadoresFilter, setJugadoresFilter] = useState(jugadores || []);
+  const [jugadoresFilterByGAme, setJugadoresFilterByGame] = useState(
+    jugadores || []
+  );
+  const [juegoFilter, setJuegoFilter] = useState("");
 
   useEffect(() => {
     let data = jugadores.filter((item) => item.jugando == true);
@@ -20,6 +25,15 @@ const ListadoJugadores = ({
     setJugadoresNext(data);
     setJugadoresFilter(jugadores);
   }, [jugadores]);
+  useEffect(() => {
+    if (juegoFilter != "") {
+      setJugadoresFilterByGame(
+        jugadoresFilter.filter((item) => item.game == juegoFilter)
+      );
+    } else {
+      setJugadoresFilterByGame(jugadoresFilter);
+    }
+  }, [juegoFilter]);
 
   const filterJugadores = (state) => {
     if (state == 1) {
@@ -138,7 +152,26 @@ const ListadoJugadores = ({
                   Todos
                 </button>
               </div>
-              {jugadoresFilter.map((jugador) => (
+              <div className="w-full mt-10">
+                <select
+                  id="gameFitler"
+                  className="border-2 w-full p-2 mt-2 rounded-md"
+                  type="text"
+                  placeholder="Nombre del Juego"
+                  value={juegoFilter}
+                  onChange={(e) => setJuegoFilter(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Todos
+                  </option>
+                  {juegos.map((juego) => (
+                    <option value={juego.name} key={juego.id}>
+                      {juego.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {jugadoresFilterByGAme.map((jugador) => (
                 <Jugador
                   key={jugador.id}
                   jugador={jugador}

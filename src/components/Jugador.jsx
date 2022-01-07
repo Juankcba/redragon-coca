@@ -222,7 +222,7 @@ function Jugador({
                 <div className="flex justify-center flex-col lg:flex-row gap-3 mt-10">
                   <button
                     type="button"
-                    className="bg-blue-500 py-2 px-5  text-white flex justify-between gap-1  font-bold uppercase rounded-lg hover:bg-blue-800"
+                    className="bg-blue-500 py-2 px-5 flex justify-center text-white  gap-1  font-bold uppercase rounded-lg hover:bg-blue-800"
                     onClick={() => setProximo(jugador, 3)}
                   >
                     Ocultar
@@ -232,7 +232,7 @@ function Jugador({
                   </button>
                   <button
                     type="button"
-                    className="bg-blue-500 py-2 px-5  text-white flex justify-between gap-1  font-bold uppercase rounded-lg hover:bg-blue-800"
+                    className="bg-blue-500 py-2 px-5  text-center  text-white flex justify-center  gap-1  font-bold uppercase rounded-lg hover:bg-blue-800"
                     onClick={() => setProximo(jugador, 4)}
                   >
                     Falto
@@ -242,7 +242,7 @@ function Jugador({
                   </button>
                   <button
                     type="button"
-                    className="bg-violet-500 py-2 px-5 flex justify-between gap-1 text-white font-bold uppercase rounded-lg hover:bg-violet-800"
+                    className="bg-violet-500 py-2 px-5 flex justify-center gap-1 text-white font-bold uppercase rounded-lg hover:bg-violet-800"
                     onClick={() => setProximo(jugador, 1)}
                   >
                     Jugando
@@ -252,7 +252,7 @@ function Jugador({
                   </button>
                   <button
                     type="button"
-                    className="bg-cyan-500 py-2 px-5  text-white flex justify-between gap-1  font-bold uppercase rounded-lg hover:bg-cyan-800"
+                    className="bg-cyan-500 py-2 px-5  text-white text-center flex justify-center gap-1  font-bold uppercase rounded-lg hover:bg-cyan-800"
                     onClick={() => setProximo(jugador, 2)}
                   >
                     Próximo
@@ -261,7 +261,7 @@ function Jugador({
                     )}
                   </button>
                 </div>
-                <div className="flex justify-end flex-col lg:flex-row gap-3 mt-4 mr-16">
+                <div className="flex justify-end flex-col lg:flex-row gap-3 mt-4 lg:mr-16 ">
                   <button
                     type="button"
                     className="bg-black py-2 px-5  text-white font-bold uppercase rounded-lg hover:bg-gray-800"

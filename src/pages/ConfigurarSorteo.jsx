@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../../firebase";
 import swal from "sweetalert";
-const ConfigurarSorteo = ({ disponible, setDisponible }) => {
+const ConfigurarSorteo = ({ disponible, setDisponible, juegos, setJuegos }) => {
   const [loading, setLoading] = useState(false);
   const handleChange = async () => {
     console.log("cambiando");
@@ -23,9 +23,37 @@ const ConfigurarSorteo = ({ disponible, setDisponible }) => {
       setLoading(false);
     }
   };
+  const handleChangeGame = async (juego) => {
+    console.log("cambiando", juego);
+
+    try {
+      await firebase.db
+        .collection("juegos")
+        .doc(juego.id)
+        .update({ ...juego, available: !juego.available })
+        .then(() => {
+          const juegosActualizados = juegos.map((juegoState) =>
+            juegoState.id === juego.id
+              ? {
+                  name: juego.name,
+                  id: juego.id,
+                  available: !juego.available,
+                }
+              : juegoState
+          );
+
+          setJuegos(juegosActualizados);
+          swal("¡Cambio el estado!  ", {
+            icon: "success",
+          });
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <section className="mt-10">
-      <div className="bg-white shadow-md rounded-lg mb-10 py-10 px-10 mx-10 w-2/12 ">
+    <section className="mt-10 w-full flex flex-col lg:flex-row">
+      <div className="bg-white shadow-md rounded-lg mb-10 py-10 px-10 mx-10 lg:w-2/12 ">
         <h2 className=" text-2xl">
           Estado:{" "}
           <span
@@ -49,6 +77,25 @@ const ConfigurarSorteo = ({ disponible, setDisponible }) => {
             </div>
           )}
         </button>
+      </div>
+      <div className="bg-white shadow-md rounded-lg mb-10 py-10 px-10 mx-10 lg:w-2/12 ">
+        <h1 className="text-center mb-10 text-2xl ">Juegos Cargados</h1>
+        {juegos.map((juego) => (
+          <div className="flex justify-between mb-2" key={juego.id}>
+            <h3 className="py-1">{juego.name}</h3>
+            <button
+              onClick={() => handleChangeGame(juego)}
+              className={
+                juego.available
+                  ? "bg-green-500 px-6 rounded-lg text-white "
+                  : "rounded-lg bg-red-500 px-5 text-white"
+              }
+              type="button"
+            >
+              {juego.available ? "ON" : "OFF"}
+            </button>
+          </div>
+        ))}
       </div>
     </section>
   );

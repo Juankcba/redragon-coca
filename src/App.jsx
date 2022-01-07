@@ -19,6 +19,7 @@ import RegistroJugadores from "./pages/RegistroJugadores";
 import RegistroGanadores from "./pages/RegistroGanadores";
 import ConfigurarSorteo from "./pages/ConfigurarSorteo";
 function App() {
+  const [refresh, setRefresh] = useState(true);
   const [participantes, setParticipantes] = useState([]);
   const [participante, setParticipante] = useState({});
   const [jugadores, setJugadores] = useState([]);
@@ -83,6 +84,7 @@ function App() {
   };
   useEffect(() => {
     const getProductsApi = async () => {
+      console.log("refrescando");
       let array = [];
 
       const result = await firebase.db
@@ -105,6 +107,7 @@ function App() {
             }
           });
           setJugadores(array);
+          setRefresh(false);
         })
         .catch(function (error) {
           console.log("Error getting documents: ", error);
@@ -120,8 +123,10 @@ function App() {
 
     //   setJugadores(jugadoresLocal);
     // };
-    getProductsApi();
-  }, []);
+    if (refresh) {
+      getProductsApi();
+    }
+  }, [refresh]);
 
   useEffect(() => {
     const getProductsApi = async () => {
@@ -266,6 +271,7 @@ function App() {
             index
             element={
               <Jugadores
+                setRefresh={setRefresh}
                 disponible={disponible}
                 juegos={juegos}
                 jugadores={jugadores}
@@ -335,6 +341,8 @@ function App() {
                 setJugador={setJugador}
                 eliminarJugador={eliminarJugador}
                 setJugadores={setJugadores}
+                juegos={juegos}
+                setJuegos={setJuegos}
                 disponible={disponible}
                 setDisponible={setDisponible}
                 edit={false}

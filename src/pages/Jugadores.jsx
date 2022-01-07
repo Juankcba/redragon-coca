@@ -8,7 +8,7 @@ import qrcode from "../../assets/img/qrcode.svg";
 const Jugadores = ({
   jugadores,
   setJugadores,
-
+  setRefresh,
   setJugador,
   edit,
   eliminarJugador,
@@ -34,6 +34,7 @@ const Jugadores = ({
           <div className="jugadores-left">
             <div className="">
               <img
+                onClick={() => setRefresh(true)}
                 src={gamerzone}
                 className="img-gamer-zone"
                 alt="gamerzone-img"
@@ -61,7 +62,12 @@ const Jugadores = ({
                   <h1 className="text-white text-center font-bold uppercase mt-20 text-5xl mb-20">
                     ¡Inscribite!
                   </h1>
-                  <img src={qrcode} className="qrcode-img " alt="qrcode-img" />
+                  <img
+                    onClick={() => setRefresh(true)}
+                    src={qrcode}
+                    className="qrcode-img "
+                    alt="qrcode-img"
+                  />
                 </>
               )}
             </div>

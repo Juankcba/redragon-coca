@@ -24,6 +24,7 @@ function NuevoJugador({
         juegos={juegos}
       />
       <ListadoJugadores
+        juegos={juegos}
         jugadores={jugadores}
         setJugador={setJugador}
         setJugadores={setJugadores}
