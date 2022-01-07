@@ -29,8 +29,11 @@ const RegistroJugadores = ({
               </h4>
             </>
           )}
-          <h5>
-            No te olvides de revisar tu casilla de correo y correo no deseado.
+          <h5 className="text-white text-center lg:text-2xl mt-10">
+            Es importante que estés atento a tu mail, te enviaremos un correo,
+            para avisarte que llegó tu turno. Además, estaremos anunciando los
+            próximos jugadores en la pantalla próxima al espacio{" "}
+            <b>#GAMERZONE</b>
           </h5>
           <div className="w-full lg:w-6/12 flex justify-center mx-auto flex-1">
             <img
