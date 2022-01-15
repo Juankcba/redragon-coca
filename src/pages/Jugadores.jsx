@@ -60,7 +60,7 @@ const Jugadores = ({
               ) : (
                 <>
                   <h1 className="text-white text-center font-bold uppercase mt-20 text-5xl mb-20">
-                    ¡Inscribite!
+                    ¡Inscribite en gamingzonerdycc.vercel.app!
                   </h1>
                   <img
                     onClick={() => setRefresh(true)}

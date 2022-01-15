@@ -142,9 +142,10 @@ function App() {
             let actual = new Date();
 
             if (
-              day.getDay() == actual.getDay() &&
-              day.getMonth() == actual.getMonth()
+              day.getDate() === actual.getDate() &&
+              day.getMonth() === actual.getMonth()
             ) {
+              console.log("el dia de hoy", day, actual.getDay());
               array.push({
                 ...doc.data(),
                 id: doc.id,
